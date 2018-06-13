@@ -33,6 +33,7 @@ alias cls "clear"
 alias cd-go-src "cd $GOPATH/src"
 alias cd-go-bin "cd $GOPATH/bin"
 alias cd-github "cd $GOPATH/src/github.com"
+alias cd-hugdubois "cd $GOPATH/src/github.com/hugdubois"
 alias cd-dotfiles "cd $GOPATH/src/github.com/hugdubois/dotfiles"
 alias cd-gomeet "cd $GOPATH/src/github.com/gomeet"
 alias cd-gomeet-gomeet "cd $GOPATH/src/github.com/gomeet/gomeet"
@@ -53,6 +54,7 @@ end
 set -gx PATH \
   ~/bin \
   ~/go/bin \
+  ~/.fzf/bin \
   ~/.cargo/bin \
   ~/.local/bin \
   /usr/bin \

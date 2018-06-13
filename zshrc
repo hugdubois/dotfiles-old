@@ -4,7 +4,7 @@
 # Path to your oh-my-zsh installation.
   export ZSH="/home/hug/.oh-my-zsh"
 
-source ~/.env.zsh
+[ -f ~/.env.zsh ] && source ~/.env.zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
@@ -105,6 +105,12 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-source ~/.profile-secrets.zsh
-source ~/.aliases.zsh
+[ -f ~/.profile-secrets.zsh ] && source ~/.profile-secrets.zsh
+[ -f ~/.aliases.zsh ] && source ~/.aliases.zsh
 
+
+
+
+
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

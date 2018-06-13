@@ -4,6 +4,11 @@ SCRIPT=$(readlink -f "$0")
 SCRIPT_PATH=$(dirname "$SCRIPT")
 DOTFILES_PATH=$SCRIPT_PATH/..
 
+# fzf
+[ -d "$HOME/.fzf" ] && $HOME/.fzf/uninstall && rm -rf "$HOME/.fzf"
+git clone https://github.com/junegunn/fzf.git $HOME/.fzf
+$HOME/.fzf/install
+
 # tmux files
 #   - tmux.conf        -> ~/.tmux.conf
 #   - tmux.linux.conf  -> ~/.tmux.linux.conf
@@ -18,6 +23,7 @@ ln -s "$DOTFILES_PATH/tmux.darwin.conf" "$HOME/.tmux.darwin.conf"
 mkdir -p "$HOME/.tmux/plugins"
 git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 $HOME/.tmux/plugins/tpm/bin/install_plugins
+
 
 # fish shell
 [ -d "$HOME/.config/fish" ] && rm -rf "$HOME/.config/fish"
