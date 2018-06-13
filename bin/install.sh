@@ -1,13 +1,13 @@
 #!/bin/sh
 
-
 SCRIPT=$(readlink -f "$0")
-DOTFILES_PATH=$(dirname "$SCRIPT")
+SCRIPT_PATH=$(dirname "$SCRIPT")
+DOTFILES_PATH=$SCRIPT_PATH/..
 
 # tmux files
-#   - tmux.conf              -> ~/.tmux.conf
-#   - tmux.linux.conf        -> ~/.tmux.linux.conf
-#   - tmux.darwin.conf       -> ~/.tmux.darwin.conf
+#   - tmux.conf        -> ~/.tmux.conf
+#   - tmux.linux.conf  -> ~/.tmux.linux.conf
+#   - tmux.darwin.conf -> ~/.tmux.darwin.conf
 [ -f "$HOME/.tmux.conf" ] && rm "$HOME/.tmux.conf"
 ln -s "$DOTFILES_PATH/tmux.conf" "$HOME/.tmux.conf"
 [ -f "$HOME/.tmux.linux.conf" ] && rm "$HOME/.tmux.linux.conf"
