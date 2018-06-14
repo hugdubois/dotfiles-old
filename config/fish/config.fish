@@ -1,6 +1,8 @@
 fish_vi_key_bindings
 set -gx LESS '-F -g -i -M -R -S -w -X -z-4'
+set -gx GOROOT ~/.go
 set -gx GOPATH ~/go
+set -gx NVM_DIR ~/.nvm
 set -gx BROWSER open
 set -gx EDITOR nvim
 set -gx VISUAL nvim
@@ -53,6 +55,7 @@ end
 # Environment variables
 set -gx PATH \
   ~/bin \
+  ~/.go/bin \
   ~/go/bin \
   ~/.fzf/bin \
   ~/.cargo/bin \
@@ -60,7 +63,6 @@ set -gx PATH \
   /usr/bin \
   /usr/sbin \
   /usr/local/bin \
-  /usr/lib/go-1.10/bin \
   /opt/bin \
   $PATH
 

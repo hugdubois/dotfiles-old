@@ -1,0 +1,138 @@
+#!/bin/sh
+
+SCRIPT=$(readlink -f "$0")
+SCRIPT_PATH=$(dirname "$SCRIPT")
+DOTFILES_PATH=$SCRIPT_PATH/..
+
+# install go
+[ -d "$HOME/.go" ] && rm -rf "$HOME/.go"
+$SCRIPT_PATH/goinstall
+GOROOT=$HOME/.go
+GOPATH=$HOME/go
+PATH=$GOROOT/bin:$GOPATH/bin:$PATH
+go get -u github.com/nsf/gocode
+
+# install nvm + node + npm
+command -v npm >/dev/null 2>&1 && sudo npm uninstall npm -g
+[ -d "$HOME/.nvm" ] && rm -rf "$HOME/.nvm"
+[ -d "$HOME/.npm" ] && rm -rf "$HOME/.npm"
+NVM_DIR=""
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+NVM_DIR=$HOME/.nvm
+\. "$NVM_DIR/nvm.sh"
+nvm install v8.11.3
+npm install -g yarn
+npm install -g neovim
+npm install -g elm elm-format elm-live elm-oracle elm-test
+npm install -g gitbook-cli
+npm install -g sass
+
+
+#├── diagrams@0.8.3
+#├── elm@0.18.0
+#├── elm-format@0.6.1-alpha
+#├── elm-live@2.7.5
+#├── elm-oracle@1.1.1
+#├── elm-test@0.18.12
+#├── gitbook-cli@2.3.2
+#├── grpcc@0.0.8
+#├── instant-markdown-d@0.1.0
+#├── mermaid.cli@0.2.1
+#├── n@2.1.8
+#├── neovim@4.1.0
+#├── npm@5.5.1
+#├── sass@1.5.1
+#├── update@0.7.4
+#└── yarn@1.2.1
+
+# haskell
+[ -f /usr/local/bin/stack ] && rm -f /usr/local/bin/stack
+[ -d "$HOME/.stack" ] && rm -rf $HOME/.stack
+curl -sSL https://get.haskellstack.org/ | sh
+
+
+
+# install rustc via rustup
+[ -d "$HOME/.cargo" ] && rm -rf "$HOME/.cargo"
+curl https://sh.rustup.rs -sSf | sh
+PATH=$HOME/.cargo/bin:$PATH
+# install exa
+cargo install exa
+
+# fzf
+[ -d "$HOME/.fzf" ] && $HOME/.fzf/uninstall && rm -rf "$HOME/.fzf"
+git clone https://github.com/junegunn/fzf.git $HOME/.fzf
+$HOME/.fzf/install
+
+# tmux files
+#   - tmux.conf        -> ~/.tmux.conf
+#   - tmux.linux.conf  -> ~/.tmux.linux.conf
+#   - tmux.darwin.conf -> ~/.tmux.darwin.conf
+[ -f "$HOME/.tmux.conf" ] && rm "$HOME/.tmux.conf"
+ln -s "$DOTFILES_PATH/tmux.conf" "$HOME/.tmux.conf"
+[ -f "$HOME/.tmux.linux.conf" ] && rm "$HOME/.tmux.linux.conf"
+ln -s "$DOTFILES_PATH/tmux.linux.conf" "$HOME/.tmux.linux.conf"
+[ -f "$HOME/.tmux.darwin.conf" ] && rm "$HOME/.tmux.darwin.conf"
+ln -s "$DOTFILES_PATH/tmux.darwin.conf" "$HOME/.tmux.darwin.conf"
+[ -d "$HOME/.tmux" ] && rm -rf "$HOME/.tmux"
+mkdir -p "$HOME/.tmux/plugins"
+git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
+$HOME/.tmux/plugins/tpm/bin/install_plugins
+
+
+# fish shell
+[ -d "$HOME/.config/fish" ] && rm -rf "$HOME/.config/fish"
+[ -d "$HOME/.config/fisherman" ] && rm -rf "$HOME/.config/fisherman"
+mkdir -p "$HOME/.config/fish/functions"
+touch $HOME/.profile-secrets.fish
+ln -s "$DOTFILES_PATH/config/fish/config.fish" "$HOME/.config/fish/config.fish"
+ln -s "$DOTFILES_PATH/config/fish/prompt.fish" "$HOME/.config/fish/prompt.fish"
+ln -s "$DOTFILES_PATH/config/fish/fishfile" "$HOME/.config/fish/fishfile"
+ln -s "$DOTFILES_PATH/config/fish/functions/__informative_git_prompt.fish" "$HOME/.config/fish/functions/__informative_git_prompt.fish"
+ln -s "$DOTFILES_PATH/config/fish/functions/nvm.fish" "$HOME/.config/fish/functions/nvm.fish"
+curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs https://git.io/fisher
+fish -c 'fisher install await done get omf/git-flow last_job_id docker-completion fzf getopts humanize_duration z nvm'
+
+# zsh shell
+[ -d "$HOME/.oh-my-zsh" ] && rm -rf "$HOME/.oh-my-zsh"
+git clone https://github.com/robbyrussell/oh-my-zsh.git "$HOME/.oh-my-zsh"
+[ -f "$HOME/.zshrc" ] && rm -f "$HOME/.zshrc"
+ln -s "$DOTFILES_PATH/zshrc" "$HOME/.zshrc"
+[ -f "$HOME/.env" ] && rm -f "$HOME/.env"
+ln -s "$DOTFILES_PATH/env" "$HOME/.env"
+[ -f "$HOME/.aliases" ] && rm -f "$HOME/.aliases"
+ln -s "$DOTFILES_PATH/aliases" "$HOME/.aliases"
+touch "$HOME/.profile-secrets.zsh"
+
+# nvim
+[ -d "$HOME/.config/nvim" ] && rm -rf "$HOME/.config/nvim"
+ln -s "$DOTFILES_PATH/config/nvim" "$HOME/.config/nvim"
+#ln -s "$HOME/go/src/github.com/sebdah/dotfiles/config/nvim" "$HOME/.config/nvim"
+[ -d "$HOME/.vim" ] && rm -rf "$HOME/.vim"
+pip2 install --upgrade neovim
+pip3 install --upgrade neovim
+
+# vim-go
+[ -d "$GOPATH/src/github.com/nsf/gocode" ] && rm -rf "$GOPATH/src/github.com/nsf/gocode"
+[ -f "$GOPATH/bin/gocode" ] && rm -f "$GOPATH/bin/gocode"
+go get -u github.com/nsf/gocode
+nvim +PlugInstall +qall
+#nvim +GoInstallBinaries +qall
+#go get -u github.com/nsf/gocode
+#go get -u github.com/zmb3/gogetdoc
+#go get -u golang.org/x/tools/cmd/guru
+#go get -u github.com/golang/lint/golint
+#go get -u github.com/davidrjenni/reftools/cmd/fillstruct
+#go get -u github.com/rogpeppe/godef
+#go get -u github.com/fatih/motion
+#go get -u github.com/kisielk/errcheck
+#go get -u github.com/derekparker/delve/cmd/dlv
+#go get -u github.com/jstemmer/gotags
+#go get -u github.com/josharian/impl
+#go get -u golang.org/x/tools/cmd/goimports
+#go get -u github.com/fatih/gomodifytags
+#go get -u github.com/dominikh/go-tools/cmd/keyify
+#go get -u golang.org/x/tools/cmd/gorename
+#go get -u github.com/klauspost/asmfmt/cmd/asmfmt
+#go get -u github.com/alecthomas/gometalinter
+

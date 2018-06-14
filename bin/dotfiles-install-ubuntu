@@ -1,0 +1,18 @@
+#!/bin/sh
+
+SCRIPT=$(readlink -f "$0")
+SCRIPT_PATH=$(dirname "$SCRIPT")
+DOTFILES_PATH=$SCRIPT_PATH/..
+
+############################
+# install apt dependencies #
+############################
+sudo apt install build-essential cmake clang zip unzip
+sudo apt install neovim neovim-qt neovim-runtime python-neovim python3-neovim ruby-neovim
+
+
+####################
+# install dotfiles #
+####################
+$SCRIPT_PATH/dotfiles-install
+
