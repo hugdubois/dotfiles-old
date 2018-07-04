@@ -28,29 +28,10 @@ npm install -g gitbook-cli
 npm install -g sass
 
 
-#├── diagrams@0.8.3
-#├── elm@0.18.0
-#├── elm-format@0.6.1-alpha
-#├── elm-live@2.7.5
-#├── elm-oracle@1.1.1
-#├── elm-test@0.18.12
-#├── gitbook-cli@2.3.2
-#├── grpcc@0.0.8
-#├── instant-markdown-d@0.1.0
-#├── mermaid.cli@0.2.1
-#├── n@2.1.8
-#├── neovim@4.1.0
-#├── npm@5.5.1
-#├── sass@1.5.1
-#├── update@0.7.4
-#└── yarn@1.2.1
-
 # haskell
-[ -f /usr/local/bin/stack ] && rm -f /usr/local/bin/stack
-[ -d "$HOME/.stack" ] && rm -rf $HOME/.stack
-curl -sSL https://get.haskellstack.org/ | sh
-
-
+#[ -f /usr/local/bin/stack ] && rm -f /usr/local/bin/stack
+#[ -d "$HOME/.stack" ] && rm -rf $HOME/.stack
+#curl -sSL https://get.haskellstack.org/ | sh
 
 # install rustc via rustup
 [ -d "$HOME/.cargo" ] && rm -rf "$HOME/.cargo"
@@ -79,8 +60,14 @@ mkdir -p "$HOME/.tmux/plugins"
 git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 $HOME/.tmux/plugins/tpm/bin/install_plugins
 
+# bash shell
+[ -d "$HOME/.profile" ] && rm -rf "$HOME/.profile"
+ln -s "$DOTFILES_PATH/profile" "$HOME/.profile"
+[ -d "$HOME/.bash_aliases" ] && rm -rf "$HOME/.bash_aliases"
+ln -s "$DOTFILES_PATH/bash_aliases" "$HOME/.bash_aliases"
 
-# fish shell
+
+# fish shell and fisherman
 [ -d "$HOME/.config/fish" ] && rm -rf "$HOME/.config/fish"
 [ -d "$HOME/.config/fisherman" ] && rm -rf "$HOME/.config/fisherman"
 mkdir -p "$HOME/.config/fish/functions"
@@ -109,7 +96,7 @@ touch "$HOME/.profile-secrets.zsh"
 ln -s "$DOTFILES_PATH/config/nvim" "$HOME/.config/nvim"
 #ln -s "$HOME/go/src/github.com/sebdah/dotfiles/config/nvim" "$HOME/.config/nvim"
 [ -d "$HOME/.vim" ] && rm -rf "$HOME/.vim"
-pip2 install --upgrade neovim
+#pip2 install --upgrade neovim
 pip3 install --upgrade neovim
 
 # vim-go

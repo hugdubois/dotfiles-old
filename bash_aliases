@@ -1,0 +1,10 @@
+alias ll="ls -lh"
+alias la="ll -a"
+alias vim="nvim"
+alias cls="clear"
+
+alias cd-go-src="cd $GOPATH/src"
+alias cd-go-bin="cd $GOPATH/bin"
+alias cd-github="cd $GOPATH/src/github.com"
+alias cd-github-hugdubois="cd $GOPATH/src/github.com/hugdubois"
+alias cd-dotfiles="cd $GOPATH/src/github.com/hugdubois/dotfiles"
