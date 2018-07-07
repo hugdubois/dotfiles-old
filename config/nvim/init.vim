@@ -36,11 +36,13 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vimwiki/vimwiki'
+Plug 'mattn/webapi-vim'
+Plug 'milkypostman/vim-togglelist'
 
 " Vim only plugins
 if !has('nvim')
-Plug 'scrooloose/nerdcommenter'
-Plug 'jeffkreeftmeijer/vim-numbertoggle'
+    Plug 'scrooloose/nerdcommenter'
+    Plug 'jeffkreeftmeijer/vim-numbertoggle'
     Plug 'Shougo/vimproc.vim', {'do' : 'make'}  " Needed to make sebdah/vim-delve work on Vim
     Plug 'Shougo/vimshell.vim'                  " Needed to make sebdah/vim-delve work on Vim
 endif
@@ -70,6 +72,20 @@ Plug 'zimbatm/haproxy.vim'                     " HAProxy syntax highlighting
 Plug 'elmcast/elm-vim'                         " elm lang
 Plug 'pbogut/deoplete-elm'                     " elm-vim + deoplete
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
+
+
+" Haskell Plugins
+if executable('ghc')
+  Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
+  Plug 'owickstrom/neovim-ghci', { 'for': 'haskell' }
+endif
+
+" Rust Plugins
+if executable('rustc')
+  Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+  Plug 'racer-rust/vim-racer', { 'for': 'rust' }
+  Plug 'sebastianmarkow/deoplete-rust'
+endif
 
 " Colorschemes
 Plug 'NLKNguyen/papercolor-theme'
@@ -510,6 +526,26 @@ xmap <C-k> <Plug>(neosnippet_expand_target)
 
 " Set the path to our snippets
 let g:neosnippet#snippets_directory='~/.config/nvim/snippets'
+" deoplete with neosnippet
+" Map expression when a tab is hit:
+"           checks if the completion popup is visible
+"           if yes
+"               then it cycles to next item
+"           else
+"               if expandable_or_jumpable
+"                   then expands_or_jumps
+"                   else returns a normal TAB
+imap <expr><TAB>
+            \ pumvisible() ? "\<C-n>" :
+            \ neosnippet#expandable_or_jumpable() ?
+            \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+            \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" Expands or completes the selected snippet/item in the popup menu
+imap <expr><silent><CR> pumvisible() ? deoplete#mappings#close_popup() .
+            \ "\<Plug>(neosnippet_jump_or_expand)" : "\<CR>"
+smap <silent><CR> <Plug>(neosnippet_jump_or_expand)
 
 "----------------------------------------------
 " Plugin: vimwiki/vimwiki
@@ -570,6 +606,31 @@ au FileType elm nmap <leader>r <Plug>(elm-repl)
 au FileType elm nmap <leader>e <Plug>(elm-error-detail)
 au FileType elm nmap <leader>d <Plug>(elm-show-docs)
 au FileType elm nmap <leader>w <Plug>(elm-browse-docs)
+
+"----------------------------------------------
+" Language: Rust
+"----------------------------------------------
+let g:rustfmt_autosave = 1
+let g:rust_clip_command = 'xclip -selection clipboard'
+"----------------------------------------------
+" Plugin: sebastianmarkow/deoplete-rust
+"----------------------------------------------
+let g:deoplete#sources#rust#racer_binary=$HOME.'/.cargo/bin/racer'
+let g:deoplete#sources#rust#rust_source_path=$GOPATH.'/src/github.com/rust-lang/rust/src'
+let g:deoplete#sources#rust#show_duplicates=1
+"let g:deoplete#sources#rust#disable_keymap=1
+let g:deoplete#sources#rust#documentation_max_height=20
+
+"----------------------------------------------
+" Plugin: zchee/deoplete-go
+"----------------------------------------------
+" Enable completing of go pointers
+let g:deoplete#sources#go#package_dot = 0
+let g:deoplete#sources#go#pointer = 1
+let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
+let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
+
+
 "----------------------------------------------
 " Language: Golang
 "----------------------------------------------
@@ -669,6 +730,42 @@ let g:neomake_go_gometalinter_maker = {
   \   '%E%f:%l::%trror: %m,' .
   \   '%W%f:%l::%tarning: %m'
   \ }
+
+
+" Haskell
+" Changes highlighting links to use Type/Structure
+let g:haskell_classic_highlighting = 1
+
+augroup ghciMaps
+  au!
+  " Background process and window management
+  au FileType haskell nnoremap <silent> <leader>gs :GhciStart<CR>
+  au FileType haskell nnoremap <silent> <leader>gk :GhciKill<CR>
+
+  " Open GHCi split horizontally
+  au FileType haskell nnoremap <silent> <leader>go :GhciOpen<CR>
+  au FileType haskell nnoremap <silent> <leader>gh :GhciHide<CR>
+
+  " Automatically reload on save
+  au BufWritePost *.hs GhciReload
+
+  " Load individual modules
+  au FileType haskell nnoremap <silent> <leader>gl :GhciLoadCurrentModule<CR>
+  au FileType haskell nnoremap <silent> <leader>gf :GhciLoadCurrentFile<CR>
+augroup END
+
+" GHCi starts automatically. Set this if you'd like to prevent that.
+let g:ghci_start_immediately = 1
+
+" GHCi Settings
+" Check if shell.nix exists in root, use nix shell if so
+if !empty(glob('shell.nix'))
+  let g:ghci_command = 'nix-shell --command "cabal repl"'
+  let g:ghci_command_line_options = ''
+else
+  let g:ghci_command = 'ghci'
+  let g:ghci_command_line_options = '-fobject-code'
+endif
 
 "----------------------------------------------
 " Language: apiblueprint

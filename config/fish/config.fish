@@ -2,6 +2,7 @@ fish_vi_key_bindings
 set -gx LESS '-F -g -i -M -R -S -w -X -z-4'
 set -gx GOROOT ~/.go
 set -gx GOPATH ~/go
+set -gx RUST_SRC_PATH ~/go/src/github.com/rust-lang/rust/src/
 set -gx NVM_DIR ~/.nvm
 set -gx BROWSER open
 set -gx EDITOR nvim
