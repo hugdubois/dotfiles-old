@@ -9,20 +9,34 @@ DOTFILES_PATH=$SCRIPT_PATH/..
 ##############################
 sudo eopkg install -c system.devel
 sudo eopkg install llvm-clang zip unzip
-sudo eopkg install fish zsh xclip git git-flow
+sudo eopkg install fish xclip git git-flow
 sudo eopkg install neovim python-neovim ruby-neovim
 sudo eopkg install sqlite3 sqlite3-devel
 sudo eopkg install openvpn
 
-
+# install git
 sudo eopkg install git
 git config --global user.name "Hugues Dubois"
 git config --global user.email "hugdubois@gmail.com"
 
-#sudo eopkg install docker
-#sudo systemctl enable docker
-#sudo systemctl start docker
-#sudo usermod -aG docker
+# docker
+sudo eopkg install docker
+sudo systemctl enable docker
+sudo systemctl start docker
+sudo usermod -aG docker $(whoami)
+
+# virtual machines
+sudo eopkg install gnome-boxes
+#sudo eopkg install virtualbox
+
+# kitematic
+sudo eopkg install kitematic
+
+# mariadb
+sudo eopkg install mariadb mariadb-server
+sudo systemctl enable mariadb
+sudo systemctl start mariadb
+# sudo mysql -A -u root -p
 
 ####################
 # install dotfiles #

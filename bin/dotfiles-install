@@ -66,7 +66,6 @@ ln -s "$DOTFILES_PATH/profile" "$HOME/.profile"
 [ -d "$HOME/.bash_aliases" ] && rm -rf "$HOME/.bash_aliases"
 ln -s "$DOTFILES_PATH/bash_aliases" "$HOME/.bash_aliases"
 
-
 # fish shell and fisherman
 [ -d "$HOME/.config/fish" ] && rm -rf "$HOME/.config/fish"
 [ -d "$HOME/.config/fisherman" ] && rm -rf "$HOME/.config/fisherman"
