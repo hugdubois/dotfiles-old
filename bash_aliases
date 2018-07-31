@@ -1,5 +1,5 @@
-alias ll="ls -lh"
-alias la="ll -a"
+alias ll="exa -l --git"
+alias la="exa -la --git"
 alias vim="nvim"
 alias cls="clear"
 

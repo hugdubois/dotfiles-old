@@ -108,4 +108,5 @@ source $ZSH/oh-my-zsh.sh
 [ -f ~/.profile-secrets.zsh ] && source ~/.profile-secrets.zsh
 [ -f ~/.aliases ] && source ~/.aliases
 
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

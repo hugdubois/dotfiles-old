@@ -41,7 +41,10 @@ alias cd-dotfiles "cd $GOPATH/src/github.com/hugdubois/dotfiles"
 alias cd-gomeet "cd $GOPATH/src/github.com/gomeet"
 alias cd-gomeet-gomeet "cd $GOPATH/src/github.com/gomeet/gomeet"
 
-alias l "exa -Gla --git"
+alias l "exa -Gl --git"
+alias ls "exa -Gla --git"
+alias ll "exa -l --git"
+alias la "exa -la --git"
 alias e "editor"
 
 alias open "xdg-open"
