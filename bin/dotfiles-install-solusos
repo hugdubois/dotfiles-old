@@ -1,51 +1,60 @@
 #!/bin/sh
 
-SCRIPT=$(readlink -f "$0")
-SCRIPT_PATH=$(dirname "$SCRIPT")
-DOTFILES_PATH=$SCRIPT_PATH/..
-
 ##############################
 # install eopkg dependencies #
 ##############################
+sudo eopkg update-repo
+sudo eopkg install -y tilix
 sudo eopkg install -c system.devel
-sudo eopkg install llvm-clang zip unzip
-sudo eopkg install fish xclip git git-flow ctags
-sudo eopkg install neovim python-neovim ruby-neovim
-sudo eopkg install ranger perl-image-exiftool silver-searcher
-sudo eopkg install sqlite3 sqlite3-devel
-sudo eopkg install openvpn bridge-utils
+sudo eopkg install -y llvm-clang zip unzip
+sudo eopkg install -y fish xclip git git-flow ctags
+sudo eopkg install -y neovim python-neovim ruby-neovim
+sudo eopkg install -y rsync mc ranger perl-image-exiftool silver-searcher
+sudo eopkg install -y sqlite3 sqlite3-devel
+sudo eopkg install -y openvpn bridge-utils openssh-server
 
 # install git
-sudo eopkg install git
+sudo eopkg install -y git
 git config --global user.name "Hugues Dubois"
 git config --global user.email "hugdubois@gmail.com"
 
 # docker
-sudo eopkg install docker
+sudo eopkg install -y docker
 sudo systemctl enable docker
 sudo systemctl start docker
 sudo usermod -aG docker $(whoami)
 
 # virtual machines
-sudo eopkg install gnome-boxes
+sudo eopkg install -y gnome-boxes
 #sudo eopkg install virtualbox
 
+# emulation
+sudo eopkg install -y wine vice caprice32
+
 # kitematic
-sudo eopkg install kitematic
+sudo eopkg install -y kitematic
 
 # mariadb
-sudo eopkg install mariadb mariadb-server
+sudo eopkg install -y mariadb mariadb-server
 sudo systemctl enable mariadb
 sudo systemctl start mariadb
 # sudo mysql -A -u root -p
 
 # divers
-sudo eopkg install youtube-dl youtube-dl-gui
-sudo eopkg install weechat
+sudo eopkg install -y youtube-dl weechat etcher
+
+# some lib
+sudo eopkg install -y ncurses-devel freetype2-devel sdl-gfx libboost-devel sdl1-devel mesalib-devel libglu-devel
 
 
 ####################
 # install dotfiles #
 ####################
-$SCRIPT_PATH/dotfiles-install
+if [ ! -d "$HOME/go/src/github.com/hugdubois/dotfiles" ]; then
+	mkdir -p $HOME/go/src/github.com/hugdubois/
+	git clone https://raw.githubusercontent.com/hugdubois/dotfiles $HOME/go/src/github.com/hugdubois/dotfiles
+fi;
+DOTFILES_PATH=$HOME/go/src/github.com/hugdubois/dotfiles
+cd $DOTFILES_PATH
+$DOTFILES_PATH/bin/dotfiles-install
 

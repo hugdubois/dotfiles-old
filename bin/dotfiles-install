@@ -4,6 +4,13 @@ SCRIPT=$(readlink -f "$0")
 SCRIPT_PATH=$(dirname "$SCRIPT")
 DOTFILES_PATH=$SCRIPT_PATH/..
 
+# install some bin tools
+mkdir -p $HOME/bin
+[ -f "$HOME/bin/ag-replace" ] && rm -rf $HOME/bin/ag-replace
+ln -s "$SCRIPT_PATH/ag-replace" "$HOME/bin/ag-replace"
+[ -f "$HOME/bin/tar-grep" ] && rm -rf $HOME/bin/tar-grep
+ln -s "$SCRIPT_PATH/tar-grep" "$HOME/bin/tar-grep"
+
 # weechat
 mkdir -p $HOME/.weechat/python/autoload
 [ -f "$HOME/.weechat/irc.conf" ] && rm "$HOME/.weechat/irc.conf"
@@ -17,6 +24,11 @@ ln -s "$DOTFILES_PATH/weechat/python/autoload/notify_send.py" "$HOME/.weechat/py
 ranger --copy-config=all
 sed -i -e 's/set preview_images false/set preview_images true/g' $HOME/.config/ranger/rc.conf
 sed -i -e 's/set draw_borders false/set draw_borders true/g' $HOME/.config/ranger/rc.conf
+
+# mc
+[ -d "$HOME/.config/mc" ] && rm -rf "$HOME/.config/mc"
+mkdir -p $HOME/.config/mc
+ln -s "$DOTFILES_PATH/config/mc/ini" "$HOME/.config/mc/ini"
 
 # install go
 [ -d "$HOME/.go" ] && rm -rf "$HOME/.go"
@@ -47,8 +59,8 @@ npm install -g gitbook-cli sass
 #[ -f /usr/local/bin/stack ] && rm -f /usr/local/bin/stack
 #[ -d "$HOME/.stack" ] && rm -rf $HOME/.stack
 #curl -sSL https://get.haskellstack.org/ | sh
-[ -f "$HOME/.haskeline" ] && rm -rf $HOME/.haskeline
-ln -s "$DOTFILES_PATH/haskeline" "$HOME/.haskeline"
+#[ -f "$HOME/.haskeline" ] && rm -rf $HOME/.haskeline
+#ln -s "$DOTFILES_PATH/haskeline" "$HOME/.haskeline"
 
 # install rustc via rustup
 [ -d "$HOME/.cargo" ] && rm -rf "$HOME/.cargo"
@@ -112,7 +124,7 @@ ln -s "$DOTFILES_PATH/env" "$HOME/.env"
 ln -s "$DOTFILES_PATH/aliases" "$HOME/.aliases"
 touch "$HOME/.profile-secrets.zsh"
 
-#ctags
+# ctags
 [ -f "$HOME/.ctags" ] && rm -rf "$HOME/.ctags"
 ln -s "$DOTFILES_PATH/ctags" "$HOME/.ctags"
 
