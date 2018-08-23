@@ -20,6 +20,7 @@ log_queries_not_using_indexes = 1
 general_log = on
 general_log_file=/tmp/mysql_general.log
 
+#
 # * Galera-related settings
 #
 [galera]

@@ -4,6 +4,12 @@ SCRIPT=$(readlink -f "$0")
 SCRIPT_PATH=$(dirname "$SCRIPT")
 DOTFILES_PATH=$SCRIPT_PATH/..
 
+
+mkdir -p $HOME/.local/bin
+sudo mkdir -p /usr/local/bin
+sudo mkdir -p /opt/bin
+
+
 # install some bin tools
 mkdir -p $HOME/bin
 [ -f "$HOME/bin/ag-replace" ] && rm -rf $HOME/bin/ag-replace
@@ -134,7 +140,8 @@ ln -s "$DOTFILES_PATH/config/nvim" "$HOME/.config/nvim"
 #ln -s "$HOME/go/src/github.com/sebdah/dotfiles/config/nvim" "$HOME/.config/nvim"
 [ -d "$HOME/.vim" ] && rm -rf "$HOME/.vim"
 #pip2 install --upgrade neovim
-pip3 install --upgrade neovim
+sudo pip3 install --upgrade pip
+sudo pip3 install --upgrade neovim
 
 # vim-go
 [ -d "$GOPATH/src/github.com/nsf/gocode" ] && rm -rf "$GOPATH/src/github.com/nsf/gocode"

@@ -5,9 +5,9 @@
 ##############################
 sudo eopkg update-repo
 sudo eopkg install -y tilix
-sudo eopkg install -c system.devel
+sudo eopkg install -y -c system.devel
 sudo eopkg install -y llvm-clang zip unzip
-sudo eopkg install -y fish xclip git git-flow ctags
+sudo eopkg install -y fish tmux xclip git git-flow ctags
 sudo eopkg install -y neovim python-neovim ruby-neovim
 sudo eopkg install -y rsync mc ranger perl-image-exiftool silver-searcher
 sudo eopkg install -y sqlite3 sqlite3-devel
@@ -19,7 +19,7 @@ git config --global user.name "Hugues Dubois"
 git config --global user.email "hugdubois@gmail.com"
 
 # docker
-sudo eopkg install -y docker
+sudo eopkg install -y docker docker-compose
 sudo systemctl enable docker
 sudo systemctl start docker
 sudo usermod -aG docker $(whoami)
@@ -40,8 +40,12 @@ sudo systemctl enable mariadb
 sudo systemctl start mariadb
 # sudo mysql -A -u root -p
 
+# postgresql
+sudo eopkg install -y postgresql
+# psql -h localhost -U ... -p ... -d ...
+
 # divers
-sudo eopkg install -y youtube-dl weechat etcher
+sudo eopkg install -y youtube-dl weechat etcher mtpaint gcolor3
 
 # some lib
 sudo eopkg install -y ncurses-devel freetype2-devel sdl-gfx libboost-devel sdl1-devel mesalib-devel libglu-devel

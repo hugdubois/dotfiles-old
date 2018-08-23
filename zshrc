@@ -109,4 +109,3 @@ source $ZSH/oh-my-zsh.sh
 [ -f ~/.aliases ] && source ~/.aliases
 
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
