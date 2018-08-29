@@ -14,7 +14,7 @@ sudo eopkg install -y sqlite3 sqlite3-devel
 sudo eopkg install -y openvpn bridge-utils openssh-server
 
 # install git
-sudo eopkg install -y git
+sudo eopkg install -y git subversion
 git config --global user.name "Hugues Dubois"
 git config --global user.email "hugdubois@gmail.com"
 
