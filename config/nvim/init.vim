@@ -129,7 +129,8 @@ set title                         " let vim set the terminal title
 set updatetime=100                " redraw the status bar often
 set foldmethod=syntax             " syntax folding method
 set foldlevelstart=30             " default foldlevel to 30 folds
-
+" Use all the memory needed, for maximum performance.
+set maxmempattern=2000000
 
 " neovim specific settings
 if has('nvim')

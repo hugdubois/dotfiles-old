@@ -36,6 +36,10 @@ sed -i -e 's/set draw_borders false/set draw_borders true/g' $HOME/.config/range
 mkdir -p $HOME/.config/mc
 ln -s "$DOTFILES_PATH/config/mc/ini" "$HOME/.config/mc/ini"
 
+[ -d "$HOME/.config/mpd" ] && rm -rf "$HOME/.config/mpd"
+mkdir -p $HOME/.config/mpd
+ln -s "$DOTFILES_PATH/config/mpd/mpd.conf" "$HOME/.config/mpd/mpd.conf"
+
 # install go
 [ -d "$HOME/.go" ] && rm -rf "$HOME/.go"
 $SCRIPT_PATH/goinstall

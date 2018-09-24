@@ -14,6 +14,7 @@ set -gx LC_ALL en_US.UTF-8
 set -gx FZF_DEFAULT_COMMAND 'ag --hidden --skip-vcs-ignores --ignore .git --ignore vendor --ignore node_modules -g ""'
 set -gx LSCOLORS 'Exfxcxdxbxegedabagacad'
 set -gx ZSH "~/.oh-my-zsh"
+set -gx DOFILES_PATH "$GOPATH/src/github.com/hugdubois/dotfiles"
 
 # Disable the fish greeting
 set fish_greeting ""
@@ -37,7 +38,7 @@ alias cd-go-src "cd $GOPATH/src"
 alias cd-go-bin "cd $GOPATH/bin"
 alias cd-github "cd $GOPATH/src/github.com"
 alias cd-hugdubois "cd $GOPATH/src/github.com/hugdubois"
-alias cd-dotfiles "cd $GOPATH/src/github.com/hugdubois/dotfiles"
+alias cd-dotfiles "cd $DOFILES_PATH"
 alias cd-gomeet "cd $GOPATH/src/github.com/gomeet"
 alias cd-gomeet-gomeet "cd $GOPATH/src/github.com/gomeet/gomeet"
 
