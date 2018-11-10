@@ -4,12 +4,16 @@
 # install eopkg dependencies #
 ##############################
 sudo eopkg update-repo
+
+# some lib
+sudo eopkg install -y ncurses-devel freetype2-devel sdl-gfx libboost-devel sdl1-devel mesalib-devel libglu-devel
+
 sudo eopkg install -y tilix
 sudo eopkg install -y -c system.devel
-sudo eopkg install -y llvm-clang zip unzip
+sudo eopkg install -y llvm-clang p7zip zip unzip
 sudo eopkg install -y htop fish tmux xclip git git-flow ctags
 sudo eopkg install -y neovim python-neovim ruby-neovim
-sudo eopkg install -y rsync mc ranger perl-image-exiftool silver-searcher
+sudo eopkg install -y rsync mc ranger perl-image-exiftool silver-searcher feh jq
 sudo eopkg install -y sqlite3 sqlite3-devel
 sudo eopkg install -y openvpn bridge-utils openssh-server
 
@@ -42,6 +46,23 @@ sudo systemctl start mariadb
 
 # postgresql
 sudo eopkg install -y postgresql
+sudo systemctl enable postgresql
+sudo systemctl start postgresql
+sudo createuser -U postgres -s hug
+# Install postgis
+sudo eopkg install -y postgresql-devel postgresql-contrib geos proj.4 proj.4-devel gdal gdal-devel libxml2-devel json-c json-c-devel
+#
+# curl -O https://download.osgeo.org/postgis/source/postgis-2.5.0.tar.gz
+# tar xzvf postgis-2.5.0.tar.gz
+# cd postgis-2.5.0
+# ./configure
+# make
+# make install
+# cd ..
+# rm -rf postgis-2.5.0
+# rm postgis-2.5.0.tar.gz
+#
+# to connect to postgresql
 # psql -h localhost -U ... -p ... -d ...
 
 # mongodb
@@ -50,9 +71,7 @@ sudo eopkg install -y postgresql
 # divers
 sudo eopkg install -y youtube-dl weechat etcher mtpaint gcolor3
 sudo eopkg install -y mpd ncmpcpp mpc-client
-
-# some lib
-sudo eopkg install -y ncurses-devel freetype2-devel sdl-gfx libboost-devel sdl1-devel mesalib-devel libglu-devel
+sudo eopkg install -y taskwarrior
 
 
 ####################

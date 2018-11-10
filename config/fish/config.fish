@@ -28,27 +28,78 @@ set fish_greeting ""
 alias grep 'grep --color=auto'
 alias scp "scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
 alias ssh "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
-alias tmux "tmux -2"
+#alias tmux "tmux -2"
 
 alias vim "nvim"
 alias vimdiff "nvim -d"
 alias cls "clear"
 
+set GITHUB_PATH "$GOPATH/src/github.com"
+
 alias cd-go-src "cd $GOPATH/src"
 alias cd-go-bin "cd $GOPATH/bin"
-alias cd-github "cd $GOPATH/src/github.com"
+#alias cd-github "cd $GOPATH/src/github.com"
+alias cd-github "cd $GITHUB_PATH"
 alias cd-hugdubois "cd $GOPATH/src/github.com/hugdubois"
 alias cd-dotfiles "cd $DOFILES_PATH"
 alias cd-gomeet "cd $GOPATH/src/github.com/gomeet"
 alias cd-gomeet-gomeet "cd $GOPATH/src/github.com/gomeet/gomeet"
+alias cd-mister "cd $GOPATH/src/github.com/MiSTer-devel"
 
 alias l "exa -Gl --git"
 alias ls "exa -Gla --git"
 alias ll "exa -l --git"
 alias la "exa -la --git"
 alias e "editor"
+alias planning "task calendar ;and task list"
+
+alias tmux-main "tmux_new main $HOME"
+alias tmux-game "tmux_new game $HOME"
+alias tmux-github "tmux_new github $GITHUB_PATH"
 
 alias open "xdg-open"
+
+
+function ls-all-file
+  ls -R $argv | awk '
+  /:$/&&f{s=$0;f=0}
+  /:$/&&!f{sub(/:$/,"");s=$0;f=1;next}
+  NF&&f{ print s"/"$0 }'
+end
+
+function basename-url
+  if not set -q $argv
+    basename -s .git (echo $argv | sed 's/"//g' | rev | cut -d '/' -f 1 | rev)
+  end
+end
+
+function github-clone-org
+  if not set -q $argv
+    set p $GITHUB_PATH"/"$argv
+    mkdir -p $p
+    cd $p
+    for repo in (curl -s "https://api.github.com/orgs/"$argv"/repos?per_page=200" | jq .[].ssh_url)
+      #set n (basename-url $repo)
+      git clone (echo $repo | sed 's/"//g')
+    end
+  end
+end
+
+function tmux_new
+  if set -q $argv
+    set argv "main $HOME"
+  end
+  set n (echo $argv | cut -d" " -f1)
+  set p (echo $argv | cut -d" " -f2)
+  if not tmux has-session -t $n
+    tmux new -d -s $n -c $p
+  end
+  if not set -q TMUX
+    tmux attach -t $n
+  else
+    tmux switch-client -t $n
+  end
+end
 
 # dcleanup can be used to clean up docker images.
 function dcleanup
@@ -56,6 +107,8 @@ function dcleanup
   docker rmi (docker images --filter dangling=true -q ^ /dev/null) ^ /dev/null
   docker volume rm (docker volume ls -qf dangling=true)
 end
+
+bass source ~/.nvm/nvm.sh
 
 # Environment variables
 set -gx PATH \

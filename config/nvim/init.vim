@@ -12,15 +12,14 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 "Plug 'Shougo/neocomplcache'        " Depenency for Shougo/neosnippet
 Plug 'godlygeek/tabular'           " This must come before plasticboy/vim-markdown
 Plug 'tpope/vim-rhubarb'           " Depenency for tpope/fugitive
-Plug 'ervandew/supertab'
+"Plug 'ervandew/supertab'
 " General plugins
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'  " Default snippets for many languages
 Plug 'bling/vim-airline'
-Plug 'christoomey/vim-tmux-navigator'
 Plug 'ctrlpvim/ctrlp.vim'          " CtrlP is installed to support tag finding in vim-go
 Plug 'editorconfig/editorconfig-vim'
-"Plug 'itchyny/calendar.vim'
+Plug 'itchyny/calendar.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
@@ -90,6 +89,7 @@ endif
 " Colorschemes
 Plug 'NLKNguyen/papercolor-theme'
 
+Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
 
 "----------------------------------------------
@@ -208,6 +208,10 @@ nnoremap N Nzzzv
 "noremap <Down> <NOP>
 "noremap <Left> <NOP>
 "noremap <Right> <NOP>
+
+"move wrap lines
+noremap  <buffer> <silent> k gk
+noremap  <buffer> <silent> j gj
 
 " Move between buffers with Shift + arrow key...
 nnoremap <S-Left> :bprevious<cr>
@@ -581,9 +585,10 @@ let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const
 "----------------------------------------------
 " Plugin: ElmCast/elm-vim
 "----------------------------------------------
+let g:elm_format_autosave = 1
 let g:elm_setup_keybindings = 1
 let g:neomake_elm_elmmake_maker = {
-  \ 'exe': 'elm-make',
+  \ 'exe': 'elm make',
   \ 'buffer_output': 1,
   \ 'errorformat':
     \ '%E%.%#--\ %m\ -%# %f' . ',' .
@@ -592,7 +597,7 @@ let g:neomake_elm_elmmake_maker = {
 \ }
 
 " enable elm-make on elm
-let g:neomake_elm_enabled_makers = [ 'elmmake' ]
+let g:neomake_elm_enabled_makers = [ 'elm make' ]
 
 " use neomake to build different files
 augroup neomake_neomake_build
