@@ -17,6 +17,8 @@ sudo eopkg install -y rsync mc ranger perl-image-exiftool silver-searcher feh jq
 sudo eopkg install -y sqlite3 sqlite3-devel
 sudo eopkg install -y openvpn bridge-utils openssh-server
 
+sudo eopkg install -y ufw gufw
+
 # install git
 sudo eopkg install -y git subversion
 git config --global user.name "Hugues Dubois"
