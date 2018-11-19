@@ -46,10 +46,12 @@ alias cd-gomeet "cd $GOPATH/src/github.com/gomeet"
 alias cd-gomeet-gomeet "cd $GOPATH/src/github.com/gomeet/gomeet"
 alias cd-mister "cd $GOPATH/src/github.com/MiSTer-devel"
 
-alias l "exa -Gl --git"
-alias ls "exa -Gla --git"
-alias ll "exa -l --git"
-alias la "exa -la --git"
+if type -q exa
+  alias l "exa -Gl --git"
+  alias ls "exa -Gla --git"
+  alias ll "exa -l --git"
+  alias la "exa -la --git"
+end
 alias e "editor"
 alias planning "task calendar ;and task list"
 

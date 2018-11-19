@@ -2,7 +2,7 @@
 
 SCRIPT=$(readlink -f "$0")
 SCRIPT_PATH=$(dirname "$SCRIPT")
-DOTFILES_PATH=$SCRIPT_PATH/..
+DOTFILES_PATH=$(realpath $SCRIPT_PATH/..)
 
 
 mkdir -p $HOME/.local/bin
