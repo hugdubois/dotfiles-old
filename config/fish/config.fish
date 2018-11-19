@@ -112,17 +112,23 @@ end
 
 bass source ~/.nvm/nvm.sh
 
-# Environment variables
-set -gx PATH \
-  ~/bin \
-  ~/.go/bin \
-  ~/go/bin \
-  ~/.fzf/bin \
-  ~/.cargo/bin \
-  ~/.local/bin \
-  /usr/bin \
-  /usr/sbin \
-  /usr/local/bin \
-  /opt/bin \
-  $PATH
+
+# PATH environment variable
+set add_to_path ~/bin \
+~/.go/bin \
+~/go/bin \
+~/.fzf/bin \
+~/.local/bin \
+~/.cargo/bin \
+.gem/ruby/2.5.0/bin \
+/usr/bin \
+/usr/sbin \
+/usr/local/bin \
+/opt/bin
+
+for p in $add_to_path
+  if test -d $p
+    set -gx PATH $p $PATH
+  end
+end
 

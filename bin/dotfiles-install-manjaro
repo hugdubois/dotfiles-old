@@ -1,5 +1,7 @@
 #!/bin/sh
 
+sudo pacman -Syu
+
 # aur yaourt installer
 sudo pacman -S --noconfirm yaourt
 
@@ -8,11 +10,10 @@ sudo pacman -S --noconfirm \
   git bash-completion \
   tmux fish exa \
   the_silver_searcher mc \
-  neovim python-neovim \
+  neovim python-neovim python2-neovim \
   ctags jq sqlite \
   weechat task youtube-dl \
   feh xclip kcolorchooser
-
 
 # mpd / ncmpcpp
 sudo pacman -S --noconfirm \
@@ -36,9 +37,11 @@ sudo usermod -aG docker hug
 # databases mariadb/postgresql
 sudo pacman -S --noconfirm \
   mariadb mariadb-clients
+sudo /usr/bin/mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
+sudo systemctl start mysqld
+sudo mysql_secure_installation
+sudo systemctl enable mysqld
 
-sudo systemctl enable mariadb
-sudo systemctl start mariadb
 # sudo mysql -A -u root -p
 
 sudo pacman -S --noconfirm \
@@ -49,6 +52,9 @@ sudo createuser -U postgres -s hug
 # to connect to postgresql
 # psql -h localhost -U ... -p ... -d ...
 
+# game
+sudo pacman -S --noconfirm \
+  retroarch retroarch-assets-xmb
 
 # git flow
 yaourt -S --noconfirm gitflow-avh-git
@@ -59,14 +65,15 @@ git config --global user.email "hugdubois@gmail.com"
 # install dotfiles #
 ####################
 if [ ! -d "$HOME/go/src/github.com/hugdubois/dotfiles" ]; then
-	mkdir -p $HOME/go/src/github.com/hugdubois/
-	git clone https://raw.githubusercontent.com/hugdubois/dotfiles $HOME/go/src/github.com/hugdubois/dotfiles
+  mkdir -p $HOME/go/src/github.com/hugdubois/
+  git clone https://raw.githubusercontent.com/hugdubois/dotfiles $HOME/go/src/github.com/hugdubois/dotfiles
 fi;
 DOTFILES_PATH=$HOME/go/src/github.com/hugdubois/dotfiles
 cd $DOTFILES_PATH
 #$DOTFILES_PATH/bin/dotfiles-install
 $DOTFILES_PATH/bin/installers/core.sh
 $DOTFILES_PATH/bin/installers/bash.sh
+$DOTFILES_PATH/bin/installers/tmux.sh
 $DOTFILES_PATH/bin/installers/ctags.sh
 $DOTFILES_PATH/bin/installers/fish.sh
 $DOTFILES_PATH/bin/installers/go.sh
@@ -76,10 +83,5 @@ $DOTFILES_PATH/bin/installers/nvim.sh
 $DOTFILES_PATH/bin/installers/nvm.sh
 $DOTFILES_PATH/bin/installers/ranger.sh
 #$DOTFILES_PATH/bin/installers/rustup.sh
-$DOTFILES_PATH/bin/installers/tmux.sh
 $DOTFILES_PATH/bin/installers/weechat.sh
 $DOTFILES_PATH/bin/installers/zsh.sh
-
-
-
-
