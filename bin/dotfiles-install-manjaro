@@ -10,6 +10,7 @@ sudo pacman -S --noconfirm \
   git bash-completion \
   tmux fish exa \
   the_silver_searcher mc \
+  python2-pip python3-pip \
   neovim python-neovim python2-neovim \
   ctags jq sqlite \
   weechat task youtube-dl \
