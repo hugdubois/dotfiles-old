@@ -35,24 +35,25 @@ sudo groupadd docker
 sudo usermod -aG docker hug
 
 # databases mariadb/postgresql
+sudo systemctl stop mysqld
 sudo pacman -S --noconfirm \
   mariadb mariadb-clients
 sudo /usr/bin/mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
 sudo systemctl start mysqld
 sudo mysql_secure_installation
 sudo systemctl enable mysqld
-
 # sudo mysql -A -u root -p
 
+sudo systemctl stop postgresql
 sudo pacman -S --noconfirm \
   postgresql postgis
-sudo systemctl enable postgresql
 sudo systemctl start postgresql
+sudo systemctl enable postgresql
 sudo createuser -U postgres -s hug
 # to connect to postgresql
 # psql -h localhost -U ... -p ... -d ...
 
-# game
+# retro gamming/games
 sudo pacman -S --noconfirm \
   retroarch retroarch-assets-xmb
 
