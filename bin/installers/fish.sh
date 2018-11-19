@@ -19,6 +19,8 @@ fish -c 'fisher add edc/bass fisherman/await fisherman/done fisherman/fzf fisher
 
 ln -s "$DOTFILES_PATH/config/fish/config.fish" "$HOME/.config/fish/config.fish"
 ln -s "$DOTFILES_PATH/config/fish/prompt.fish" "$HOME/.config/fish/prompt.fish"
+
+[ -f "$HOME/.config/fish/fishfile" ] && mv "$HOME/.config/fish/fishfile" "$DOTFILES_PATH/config/fish/fishfile"
 ln -s "$DOTFILES_PATH/config/fish/fishfile" "$HOME/.config/fish/fishfile"
 ln -s "$DOTFILES_PATH/config/fish/functions/__informative_git_prompt.fish" "$HOME/.config/fish/functions/__informative_git_prompt.fish"
 ln -s "$DOTFILES_PATH/config/fish/completions/git.fish" "$HOME/.config/fish/completions/git.fish"
