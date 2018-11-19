@@ -120,7 +120,7 @@ set add_to_path ~/bin \
 ~/.fzf/bin \
 ~/.local/bin \
 ~/.cargo/bin \
-.gem/ruby/2.5.0/bin \
+~/.gem/ruby/2.5.0/bin \
 /usr/bin \
 /usr/sbin \
 /usr/local/bin \
