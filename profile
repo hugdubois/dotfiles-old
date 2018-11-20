@@ -2,5 +2,3 @@
 [[ -f ~/.env ]] && . ~/.env
 [[ -f ~/.bash_aliases ]] && . ~/.bash_aliases
 [[ -f ~/.profile.secret ]] && . ~/.profile.secret
-
-[[ -f ~/.bashrc ]] && . ~/.bashrc
