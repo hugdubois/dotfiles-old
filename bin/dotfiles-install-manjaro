@@ -7,8 +7,9 @@ sudo pacman -S --noconfirm yaourt
 
 # teminal tools
 sudo pacman -S --noconfirm \
-  git bash-completion \
+  git bash-completion tk \
   tmux fish exa \
+  p7zip zip unzip \
   the_silver_searcher mc \
   python-pip python2-pip \
   python-neovim python2-neovim \
