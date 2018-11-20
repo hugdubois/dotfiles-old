@@ -16,4 +16,4 @@ sudo pip3 install --force-reinstall neovim
 gem install neovim
 
 nvim +PlugInstall +qall
-#nvim +GoInstallBinaries +qall
+nvim +GoInstallBinaries +qall
