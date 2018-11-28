@@ -451,6 +451,15 @@ let g:tagbar_type_go = {
     \ 'ctagsargs' : '-sort -silent'
 \ }
 
+let g:tagbar_type_elm = {
+          \   'ctagstype':'elm'
+          \ , 'kinds':['h:header', 'i:import', 't:type', 'f:function', 'e:exposing']
+          \ , 'sro':'&&&'
+          \ , 'kind2scope':{ 'h':'header', 'i':'import'}
+          \ , 'sort':0
+          \ , 'ctagsbin':'~/.config/nvim/scripts/elmtags.py'
+          \ , 'ctagsargs': ''
+          \ }
 "----------------------------------------------
 " Plugin: plasticboy/vim-markdown
 "----------------------------------------------
@@ -587,14 +596,14 @@ let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const
 "----------------------------------------------
 let g:elm_format_autosave = 1
 let g:elm_setup_keybindings = 1
-let g:neomake_elm_elmmake_maker = {
-  \ 'exe': 'elm make',
-  \ 'buffer_output': 1,
-  \ 'errorformat':
-    \ '%E%.%#--\ %m\ -%# %f' . ',' .
-    \ '%C%l\\|' . ',' .
-    \ '%C%.%#'
-\ }
+"let g:neomake_elm_elmmake_maker = {
+  "\ 'exe': 'elm make',
+  "\ 'buffer_output': 1,
+  "\ 'errorformat':
+    "\ '%E%.%#--\ %m\ -%# %f' . ',' .
+    "\ '%C%l\\|' . ',' .
+    "\ '%C%.%#'
+"\ }
 
 " enable elm-make on elm
 let g:neomake_elm_enabled_makers = [ 'elm make' ]

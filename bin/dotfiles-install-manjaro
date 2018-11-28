@@ -15,7 +15,8 @@ sudo pacman -S --noconfirm \
   python-neovim python2-neovim \
   neovim ctags jq sqlite \
   weechat task youtube-dl \
-  feh xclip kcolorchooser
+  lib32-gconf \
+  tree feh xclip kcolorchooser
 
 # mpd / ncmpcpp
 sudo pacman -S --noconfirm \
