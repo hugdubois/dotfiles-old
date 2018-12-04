@@ -37,6 +37,10 @@ sudo pacman -S --noconfirm \
 sudo groupadd docker
 sudo usermod -aG docker hug
 
+# nginx
+sudo systemctl stop nginx
+sudo pacman -S --noconfirm nginx
+
 # databases mariadb/postgresql
 sudo systemctl stop mysqld
 sudo pacman -S --noconfirm \
