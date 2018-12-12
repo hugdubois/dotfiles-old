@@ -53,7 +53,7 @@ sudo systemctl enable mysqld
 
 sudo systemctl stop postgresql
 sudo pacman -S --noconfirm \
-  postgresql postgis
+  postgresql postgis postgresql-libs postgresql-old-upgrade
 sudo -u postgres initdb --locale en_US.UTF-8 -D '/var/lib/postgres/data'
 sudo systemctl start postgresql
 sudo systemctl enable postgresql
