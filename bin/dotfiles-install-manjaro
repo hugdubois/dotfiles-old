@@ -70,6 +70,11 @@ yaourt -S --noconfirm gitflow-avh-git
 git config --global user.name "Hugues Dubois"
 git config --global user.email "hugdubois@gmail.com"
 
+
+# visual studio code
+yaourt -S --noconfirm visual-studio-code-bin
+
+
 ####################
 # install dotfiles #
 ####################
