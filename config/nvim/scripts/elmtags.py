@@ -32,7 +32,11 @@ filename = sys.argv[1]
 re_header = re.compile(r"^-- (.*)$")
 re_import = re.compile(r"^import ([^ \n]+)( as ([^ \n]+))?( exposing (\([^)]+\)))?")
 re_type = re.compile(r"^type( alias)? ([^ \n]+)( =)?$")
-re_function = re.compile(r"^([^ ]+) : (.*)$")
+# re_function = re.compile(r"^([^ ]+) :
+# (.*)$")
+re_function = re.compile(r"^([^ ]+) :((.|\n)*)$")
+# re_function = re.compile(r"^([^ ]+) :((.|\n)*)\1(.*)", re.M | re.DEBUG)
+# re_function = re.compile(r"^([^ ]+) :((.|\n)*)\1", re.M)
 
 
 file_content = []
@@ -82,7 +86,7 @@ for lnum, line in enumerate(file_content):
         cur_tag = match_function.group(1)
         cur_searchterm = "^" + cur_tag + " :"
         cur_kind = "f"
-        args = "\theader:" + cur_head + "\tsignature:(" + match_function.group(2) + ")"
+        args = "\theader:" + cur_head + "\tsignature:(" + match_function.group(2).replace("\n", " ").strip('\n') + ")"
     else:
         continue
 

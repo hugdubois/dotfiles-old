@@ -659,9 +659,9 @@ au FileType go nmap <F8> :GoMetaLinter<cr>
 au FileType go nmap <F9> :GoCoverageToggle -short<cr>
 au FileType go nmap <F10> :GoTest -short<cr>
 au FileType go nmap <F12> <Plug>(go-def)
-au Filetype go nmap <leader>ga <Plug>(go-alternate-edit)
-au Filetype go nmap <leader>gah <Plug>(go-alternate-split)
-au Filetype go nmap <leader>gav <Plug>(go-alternate-vertical)
+au FileType go nmap <leader>ga <Plug>(go-alternate-edit)
+au FileType go nmap <leader>gah <Plug>(go-alternate-split)
+au FileType go nmap <leader>gav <Plug>(go-alternate-vertical)
 au FileType go nmap <leader>gt :GoDeclsDir<cr>
 au FileType go nmap <leader>gc <Plug>(go-coverage-toggle)
 "au FileType go nmap <leader>gd <Plug>(go-def)
@@ -968,3 +968,12 @@ au FileType yaml set expandtab
 au FileType yaml set shiftwidth=2
 au FileType yaml set softtabstop=2
 au FileType yaml set tabstop=2
+
+"----------------------------------------------
+" Language: Elm
+"----------------------------------------------
+au FileType elm set expandtab
+au FileType elm set shiftwidth=4
+au FileType elm set softtabstop=4
+au FileType elm set tabstop=4
+
