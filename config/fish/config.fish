@@ -122,6 +122,8 @@ set add_to_path ~/bin \
 ~/.cargo/bin \
 ~/.gem/ruby/2.5.0/bin \
 ~/.yarn/bin \
+~/.config/composer/vendor/bin \
+~/.vim/plugged/phpactor/bin \
 /usr/bin \
 /usr/sbin \
 /usr/local/bin \

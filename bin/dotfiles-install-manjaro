@@ -18,6 +18,14 @@ sudo pacman -S --noconfirm \
   lib32-gconf \
   tree feh xclip kcolorchooser
 
+git config --global user.name "Hugues Dubois"
+git config --global user.email "hugdubois@gmail.com"
+sudo git config --global user.name "Hugues Dubois"
+sudo git config --global user.email "hugdubois@gmail.com"
+# PHP/composer
+sudo pacman -S --noconfirm \
+  php php-fpm composer
+
 # mpd / ncmpcpp
 sudo pacman -S --noconfirm \
   mpd ncmpcpp
@@ -25,7 +33,6 @@ sudo pacman -S --noconfirm \
 # virtualbox
 sudo pacman -S --noconfirm \
   virtualbox \
-  linux418-virtualbox-host-modules \
   linux419-virtualbox-host-modules
 sudo modprobe vboxdrv
 sudo gpasswd -a hug vboxusers
@@ -65,10 +72,15 @@ sudo createuser -U postgres -s hug
 sudo pacman -S --noconfirm \
   retroarch retroarch-assets-xmb
 
+
+sudo pacman -S --noconfirm etckeeper
+sudo etckeeper init
+sudo etckeeper commit -m "First commit"
+sudo systemctl start etckeeper.timer
+sudo systemctl enable etckeeper.timer
+
 # git flow
 yaourt -S --noconfirm gitflow-avh-git
-git config --global user.name "Hugues Dubois"
-git config --global user.email "hugdubois@gmail.com"
 
 
 # visual studio code

@@ -37,6 +37,8 @@ Plug 'tpope/vim-surround'
 Plug 'vimwiki/vimwiki'
 Plug 'mattn/webapi-vim'
 Plug 'milkypostman/vim-togglelist'
+Plug 'phpactor/phpactor', {'for': 'php', 'do': 'composer install'}
+Plug 'kristijanhusak/deoplete-phpactor'
 
 " Vim only plugins
 if !has('nvim')
@@ -746,6 +748,24 @@ let g:neomake_go_gometalinter_maker = {
   \   '%W%f:%l::%tarning: %m'
   \ }
 
+" PHP
+" context-aware menu with all functions (ALT-m)
+nnoremap <m-m> :call phpactor#ContextMenu()<cr>
+
+nnoremap gd :call phpactor#GotoDefinition()<CR>
+nnoremap gr :call phpactor#FindReferences()<CR>
+
+" Extract method from selection
+vmap <silent><Leader>em :<C-U>call phpactor#ExtractMethod()<CR>
+" extract variable
+vnoremap <silent><Leader>ee :<C-U>call phpactor#ExtractExpression(v:true)<CR>
+nnoremap <silent><Leader>ee :call phpactor#ExtractExpression(v:false)<CR>
+" extract interface
+nnoremap <silent><Leader>rei :call phpactor#ClassInflect()<CR>
+
+" deoplete configuration
+let g:deoplete#sources = {}
+let g:deoplete#sources.php = ['omni', 'phpactor', 'ultisnips', 'buffer']
 
 " Haskell
 " Changes highlighting links to use Type/Structure
@@ -976,4 +996,12 @@ au FileType elm set expandtab
 au FileType elm set shiftwidth=4
 au FileType elm set softtabstop=4
 au FileType elm set tabstop=4
+
+"----------------------------------------------
+" Language: PHP
+"----------------------------------------------
+au FileType php set expandtab
+au FileType php set shiftwidth=4
+au FileType php set softtabstop=4
+au FileType php set tabstop=4
 
