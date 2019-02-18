@@ -22,9 +22,10 @@ git config --global user.name "Hugues Dubois"
 git config --global user.email "hugdubois@gmail.com"
 sudo git config --global user.name "Hugues Dubois"
 sudo git config --global user.email "hugdubois@gmail.com"
+
 # PHP/composer
 sudo pacman -S --noconfirm \
-  php php-fpm composer
+  php php-fpm composer php-intl php-gd
 
 # mpd / ncmpcpp
 sudo pacman -S --noconfirm \
@@ -47,6 +48,9 @@ sudo usermod -aG docker hug
 # nginx
 sudo systemctl stop nginx
 sudo pacman -S --noconfirm nginx
+
+
+############## DATABASES ##############
 
 # databases mariadb/postgresql
 sudo systemctl stop mysqld
@@ -79,12 +83,24 @@ sudo etckeeper commit -m "First commit"
 sudo systemctl start etckeeper.timer
 sudo systemctl enable etckeeper.timer
 
+sudo pacman -S --noconfirm libcurl-gnutls lib32-libcurl-gnutls
+
+
+############## SOME EXTRA EXTENSIONS ##############
+
 # git flow
 yaourt -S --noconfirm gitflow-avh-git
 
 
 # visual studio code
 yaourt -S --noconfirm visual-studio-code-bin
+
+# mongodb
+yaourt -S --noconfirm mongodb-bin
+
+
+# php extensions
+yaourt -S --noconfirm php-redis php-mongodb php-amqp
 
 
 ####################
