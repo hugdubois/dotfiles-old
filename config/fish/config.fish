@@ -61,6 +61,13 @@ alias tmux-github "tmux_new github $GITHUB_PATH"
 
 alias open "xdg-open"
 
+function svn-modified-files
+  svn st | cut -c8- | xargs ls
+end
+
+function svn-edit-modified
+  nvim -p (svn-modified-files)
+end
 
 function ls-all-file
   ls -R $argv | awk '
