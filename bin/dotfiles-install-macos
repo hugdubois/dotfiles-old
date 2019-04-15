@@ -1,0 +1,102 @@
+#!/bin/sh
+
+# config git
+git config --global user.name "Hugues Dubois"
+git config --global user.email "hugdubois@gmail.com"
+sudo git config --global user.name "Hugues Dubois"
+sudo git config --global user.email "hugdubois@gmail.com"
+
+brew update
+brew tap caskroom/cask
+
+############## CORE ##############
+brew install \
+  coreutils automake autoconf openssl \
+  libyaml readline libxslt libtool unixodbc \
+  p7zip unzip curl \
+  tmux fish lsd \
+  the_silver_search mc \
+  neovim ctags jq \
+  weechat youtube-dl \
+  tree feh \
+  nginx
+
+brew cask install visual-studio-code
+
+############## ENTERTAINMENT/GAMING ##############
+# mpd / ncmpcpp
+brew install mpd ncmpcpp
+
+# retro gamming/games
+brew cask install retroarch
+############## DOCKER\VIRTUAL MACHINE ##############
+############## UNACTIVATE USE DOCKER FOR MAC ###########
+# brew cask install virtualbox
+# brew cask install docker
+# brew install docker-compose docker-compose-completion
+# sudo groupadd docker
+# sudo usermod -aG docker hug
+
+############## DATABASES ##############
+# sqlite
+brew install sqlite
+
+# mysql/mariadb
+brew install mariadb
+brew services stop mariadb
+brew services start mariadb
+sudo mysql_secure_installation
+brew services stop mariadb
+# sudo mysql -A -u root -p
+
+# postgres/postgis
+brew install postgresql postgis
+sudo -u postgres initdb --locale en_US.UTF-8 -D '/var/lib/postgres/data'
+brew services stop mariadb
+brew services start mariadb
+sudo createuser -U postgres -s hug
+# to connect to postgresql
+# psql -h localhost -U ... -p ... -d ...
+
+# mongoDb
+brew install mongodb
+
+# redis
+brew install redis
+
+############## LANGUAGES ##############
+#brew install \
+#  php composer python \
+#  node \
+#  rust go \
+#  erlang elixir \
+#  haskell ocaml \
+#  gnu-smalltalk
+
+
+
+
+####################
+# install dotfiles #
+####################
+if [ ! -d "$HOME/go/src/github.com/hugdubois/dotfiles" ]; then
+  mkdir -p $HOME/go/src/github.com/hugdubois/
+  git clone https://raw.githubusercontent.com/hugdubois/dotfiles $HOME/go/src/github.com/hugdubois/dotfiles
+fi;
+DOTFILES_PATH=$HOME/go/src/github.com/hugdubois/dotfiles
+cd $DOTFILES_PATH
+#$DOTFILES_PATH/bin/dotfiles-install
+$DOTFILES_PATH/bin/installers/core.sh
+$DOTFILES_PATH/bin/installers/bash.sh
+$DOTFILES_PATH/bin/installers/tmux.sh
+$DOTFILES_PATH/bin/installers/ctags.sh
+$DOTFILES_PATH/bin/installers/fish.sh
+$DOTFILES_PATH/bin/installers/go.sh
+$DOTFILES_PATH/bin/installers/mc.sh
+$DOTFILES_PATH/bin/installers/mpd.sh
+$DOTFILES_PATH/bin/installers/nvim.sh
+$DOTFILES_PATH/bin/installers/nvm.sh
+$DOTFILES_PATH/bin/installers/ranger.sh
+#$DOTFILES_PATH/bin/installers/rustup.sh
+$DOTFILES_PATH/bin/installers/weechat.sh
+$DOTFILES_PATH/bin/installers/zsh.sh
