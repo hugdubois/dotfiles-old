@@ -10,17 +10,21 @@ brew update
 brew tap caskroom/cask
 
 ############## CORE ##############
+brew cask install xquartz
+
 brew install \
   coreutils automake autoconf openssl \
-  libyaml readline libxslt libtool unixodbc \
+  unzip fop curl libyaml readline libxslt libtool unixodbc \
   p7zip unzip curl \
-  tmux fish lsd \
-  the_silver_search mc \
+  tmux reattach-to-user-namespace fish \
+  the_silver_searcher mc \
   neovim ctags jq \
   weechat youtube-dl \
   tree feh \
+  wxmac \
   nginx
 
+brew cask install java
 brew cask install visual-studio-code
 
 ############## ENTERTAINMENT/GAMING ##############
@@ -74,8 +78,6 @@ brew install redis
 #  gnu-smalltalk
 
 
-
-
 ####################
 # install dotfiles #
 ####################
@@ -91,6 +93,7 @@ $DOTFILES_PATH/bin/installers/bash.sh
 $DOTFILES_PATH/bin/installers/tmux.sh
 $DOTFILES_PATH/bin/installers/ctags.sh
 $DOTFILES_PATH/bin/installers/fish.sh
+$DOTFILES_PATH/bin/installers/asdf.sh
 $DOTFILES_PATH/bin/installers/go.sh
 $DOTFILES_PATH/bin/installers/mc.sh
 $DOTFILES_PATH/bin/installers/mpd.sh

@@ -19,6 +19,3 @@ ln -s "$DOTFILES_PATH/bin/ag-replace" "$HOME/bin/ag-replace"
 [ -f "$HOME/bin/tar-grep" ] && rm -rf $HOME/bin/tar-grep
 ln -s "$DOTFILES_PATH/bin/tar-grep" "$HOME/bin/tar-grep"
 
-
-git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.7.1
-
