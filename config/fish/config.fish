@@ -1,9 +1,6 @@
 fish_vi_key_bindings
 set -gx LESS '-F -g -i -M -R -S -w -X -z-4'
-set -gx GOROOT ~/.go
-set -gx GOPATH ~/go
-set -gx RUST_SRC_PATH ~/go/src/github.com/rust-lang/rust/src/
-set -gx NVM_DIR ~/.nvm
+set -gx RUST_SRC_PATH ~/src/github.com/rust-lang/rust/src/
 set -gx BROWSER open
 set -gx EDITOR nvim
 set -gx VISUAL nvim
@@ -13,8 +10,8 @@ set -gx LANGUAGE en_US.utf-8
 set -gx LC_ALL en_US.UTF-8
 set -gx FZF_DEFAULT_COMMAND 'ag --hidden --skip-vcs-ignores --ignore .git --ignore vendor --ignore node_modules -g ""'
 set -gx LSCOLORS 'Exfxcxdxbxegedabagacad'
-set -gx ZSH "~/.oh-my-zsh"
-set -gx DOFILES_PATH "$GOPATH/src/github.com/hugdubois/dotfiles"
+#set -gx ZSH "~/.oh-my-zsh"
+set -gx DOFILES_PATH "$HOME/src/github.com/hugdubois/dotfiles"
 
 # Disable the fish greeting
 set fish_greeting ""
@@ -36,15 +33,15 @@ alias cls "clear"
 
 set GITHUB_PATH "$GOPATH/src/github.com"
 
-alias cd-go-src "cd $GOPATH/src"
-alias cd-go-bin "cd $GOPATH/bin"
+#alias cd-go-src "cd $GOPATH/src"
+#alias cd-go-bin "cd $GOPATH/bin"
 #alias cd-github "cd $GOPATH/src/github.com"
 alias cd-github "cd $GITHUB_PATH"
-alias cd-hugdubois "cd $GOPATH/src/github.com/hugdubois"
+alias cd-hugdubois "cd $HOME/src/github.com/hugdubois"
 alias cd-dotfiles "cd $DOFILES_PATH"
-alias cd-gomeet "cd $GOPATH/src/github.com/gomeet"
-alias cd-gomeet-gomeet "cd $GOPATH/src/github.com/gomeet/gomeet"
-alias cd-mister "cd $GOPATH/src/github.com/MiSTer-devel"
+alias cd-gomeet "cd $HOME/src/github.com/gomeet"
+alias cd-gomeet-gomeet "cd $HOME/src/github.com/gomeet/gomeet"
+alias cd-mister "cd $HOME/src/github.com/MiSTer-devel"
 
 if type -q exa
   alias l "exa -Gl --git"
@@ -110,13 +107,8 @@ function dcleanup
   docker volume rm (docker volume ls -qf dangling=true)
 end
 
-bass source ~/.nvm/nvm.sh
-
-
 # PATH environment variable
 set add_to_path ~/bin \
-~/.go/bin \
-~/go/bin \
 ~/.fzf/bin \
 ~/.local/bin \
 ~/.cargo/bin \
@@ -135,3 +127,5 @@ for p in $add_to_path
   end
 end
 
+set -g fish_user_paths "/usr/local/sbin" $fish_user_paths
+source ~/.asdf/asdf.fish

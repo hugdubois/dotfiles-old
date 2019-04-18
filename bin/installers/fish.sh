@@ -15,11 +15,9 @@ DOTFILES_PATH=$(realpath $SCRIPT_PATH/../..)
 mkdir -p "$HOME/.config/fish/functions"
 mkdir -p "$HOME/.config/fish/completions"
 touch $HOME/.profile-secrets.fish
-#ln -s "$DOTFILES_PATH/config/fish/functions/nvm.fish" "$HOME/.config/fish/functions/nvm.fish"
 curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs https://git.io/fisher
 fish -c 'fish_update_completions'
-fish -c 'fisher add edc/bass fisherman/await fisherman/done fisherman/fzf fisherman/get fisherman/getopts fisherman/humanize_duration fisherman/last_job_id fisherman/nvm fisherman/z'
-#fish -c 'fisher add edc/bass fisherman/await fisherman/done fisherman/fzf fisherman/get fisherman/getopts fisherman/humanize_duration fisherman/last_job_id fisherman/nvm fisherman/z oh-my-fish/plugin-git-flow'
+fish -c 'fisher add edc/bass fisherman/await fisherman/done fisherman/fzf fisherman/get fisherman/getopts fisherman/humanize_duration fisherman/last_job_id fisherman/z'
 
 ln -s "$DOTFILES_PATH/config/fish/config.fish" "$HOME/.config/fish/config.fish"
 ln -s "$DOTFILES_PATH/config/fish/prompt.fish" "$HOME/.config/fish/prompt.fish"

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 case $(uname -s) in
     Linux*)     SCRIPT=$(readlink -f "$0") ;;
@@ -10,11 +10,7 @@ DOTFILES_PATH=$(realpath $SCRIPT_PATH/../..)
 
 # install go
 [ -d "$HOME/.go" ] && rm -rf "$HOME/.go"
-$DOTFILES_PATH/bin/goinstall
-GOROOT=$HOME/.go
-GOPATH=$HOME/go
-PATH=$GOROOT/bin:$GOPATH/bin:$PATH
-
+. $HOME/.asdf/asdf.sh
 # for vim-go
 [ -d "$GOPATH/src/github.com/nsf/gocode" ] && rm -rf "$GOPATH/src/github.com/nsf/gocode"
 [ -f "$GOPATH/bin/gocode" ] && rm -f "$GOPATH/bin/gocode"

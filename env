@@ -1,8 +1,5 @@
 export LESS='-F -g -i -M -R -S -w -X -z-4'
-export GOROOT=$HOME/.go
-export GOPATH=$($GOROOT/bin/go env GOPATH)
-export GOPATH=~/go
-export RUST_SRC_PATH=~/go/src/github.com/rust-lang/rust/src/
+export RUST_SRC_PATH=~/src/github.com/rust-lang/rust/src/
 export NVM_DIR=$HOME/.nvm
 export BROWSER=open
 export EDITOR=nvim
@@ -13,4 +10,4 @@ export LANGUAGE=en_US.utf-8
 export LC_ALL=en_US.UTF-8
 export FZF_DEFAULT_COMMAND='ag --hidden --skip-vcs-ignores --ignore .git --ignore vendor --ignore node_modules -g ""'
 export LSCOLORS='Exfxcxdxbxegedabagacad'
-export PATH="~/bin:$GOROOT/bin:$GOPATH/bin:~/.cargo/bin:~/.local/bin:/usr/bin:/usr/sbin:/usr/local/bin:/opt/bin:~/.gem/ruby/2.5.0/bin:$PATH"
+export PATH="~/bin:~/.cargo/bin:~/.local/bin:/usr/bin:/usr/sbin:/usr/local/bin:/opt/bin:~/.gem/ruby/2.5.0/bin:$PATH"

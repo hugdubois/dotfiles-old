@@ -49,12 +49,14 @@ if !has('nvim')
 endif
 
 " Language support
+Plug 'fatih/vim-go'                            " Go support
+Plug 'elixir-editors/vim-elixir'               " Elixir syntax support
+Plug 'slashmili/alchemist.vim'
 Plug 'aklt/plantuml-syntax'                    " PlantUML syntax highlighting
 Plug 'cespare/vim-toml'                        " toml syntax highlighting
 Plug 'chr4/nginx.vim'                          " nginx syntax highlighting
 Plug 'dag/vim-fish'                            " Fish syntax highlighting
 Plug 'digitaltoad/vim-pug'                     " Pug syntax highlighting
-Plug 'fatih/vim-go'                            " Go support
 Plug 'fishbullet/deoplete-ruby'                " Ruby auto completion
 Plug 'hashivim/vim-terraform'                  " Terraform syntax highlighting
 Plug 'kchmck/vim-coffee-script'                " CoffeeScript syntax highlighting
@@ -67,13 +69,12 @@ Plug 'plasticboy/vim-markdown'                 " Markdown syntax highlighting
 Plug 'rodjek/vim-puppet'                       " Puppet syntax highlighting
 Plug 'tclh123/vim-thrift'                      " Thrift syntax highlighting
 Plug 'zchee/deoplete-jedi'                     " Go auto completion
-Plug 'zchee/deoplete-go', { 'do': 'make'}      " Go auto completion
 Plug 'kshenoy/vim-signature'                   " Show marks in margin
 Plug 'zimbatm/haproxy.vim'                     " HAProxy syntax highlighting
 Plug 'elmcast/elm-vim'                         " elm lang
 Plug 'pbogut/deoplete-elm'                     " elm-vim + deoplete
+Plug 'zchee/deoplete-go', { 'do': 'make'}      " Go auto completion
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
-
 
 " Haskell Plugins
 if executable('ghc')
@@ -93,6 +94,9 @@ Plug 'NLKNguyen/papercolor-theme'
 
 Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
+
+
+
 
 "----------------------------------------------
 " General settings
@@ -140,8 +144,12 @@ if has('nvim')
     " install the neovim package for these binaries separately like this for
     " example:
     " pip3.6 install -U neovim
-    let g:python_host_prog = '/usr/bin/python2'
-    let g:python3_host_prog = '/usr/bin/python3'
+    """ FOR LINUX
+    " let g:python_host_prog = '/usr/bin/python2'
+    " let g:python3_host_prog = '/usr/bin/python3'
+    """ FOR MACOS
+    let g:python_host_prog = '/usr/local/bin/python2'
+    let g:python3_host_prog = '/usr/local/bin/python3'
     " Skip the check of neovim module
     let g:python3_host_skip_check = 1
 endif
@@ -598,14 +606,14 @@ let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const
 "----------------------------------------------
 let g:elm_format_autosave = 1
 let g:elm_setup_keybindings = 1
-"let g:neomake_elm_elmmake_maker = {
-  "\ 'exe': 'elm make',
-  "\ 'buffer_output': 1,
-  "\ 'errorformat':
-    "\ '%E%.%#--\ %m\ -%# %f' . ',' .
-    "\ '%C%l\\|' . ',' .
-    "\ '%C%.%#'
-"\ }
+let g:neomake_elm_elmmake_maker = {
+  \ 'exe': 'elm make',
+  \ 'buffer_output': 1,
+  \ 'errorformat':
+    \ '%E%.%#--\ %m\ -%# %f' . ',' .
+    \ '%C%l\\|' . ',' .
+    \ '%C%.%#'
+\ }
 
 " enable elm-make on elm
 let g:neomake_elm_enabled_makers = [ 'elm make' ]

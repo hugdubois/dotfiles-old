@@ -1,6 +1,6 @@
 #!/bin/sh
 
-GITHUB_PATH="$HOME/go/src/github.com"
+GITHUB_PATH="$HOME/src/github.com"
 
 REPOS="gomeet/gomeet
 gomeet/go-proto-gomeetfaker

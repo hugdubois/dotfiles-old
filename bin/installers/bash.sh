@@ -18,5 +18,3 @@ ln -s "$DOTFILES_PATH/env" "$HOME/.env"
 ln -s "$DOTFILES_PATH/profile" "$HOME/.profile"
 [ -f "$HOME/.bash_aliases" ] && rm -rf "$HOME/.bash_aliases"
 ln -s "$DOTFILES_PATH/bash_aliases" "$HOME/.bash_aliases"
-
-
