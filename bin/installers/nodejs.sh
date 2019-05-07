@@ -14,4 +14,4 @@ npm install -g yarn
 npm install -g neovim
 npm install -g gitbook-cli sass
 #npm install -g diagrams grpcc instant-markdown-d mermaid.cli
-
+npm install -g elchemy
