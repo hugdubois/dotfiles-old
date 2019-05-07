@@ -56,8 +56,10 @@ alias tmux-main "tmux_new main $HOME"
 alias tmux-game "tmux_new game $HOME"
 alias tmux-github "tmux_new github $GITHUB_PATH"
 
-alias open "xdg-open"
-
+switch (uname)
+    case Linux
+      alias open "xdg-open"
+end
 
 function ls-all-file
   ls -R $argv | awk '
