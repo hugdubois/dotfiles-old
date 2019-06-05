@@ -73,6 +73,8 @@ Plug 'zimbatm/haproxy.vim'                     " HAProxy syntax highlighting
 Plug 'elmcast/elm-vim'                         " elm lang
 Plug 'pbogut/deoplete-elm'                     " elm-vim + deoplete
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
+Plug 'rhysd/vim-crystal'
+Plug 'HarrisonB/deoplete-crystal'
 
 
 " Haskell Plugins
@@ -802,6 +804,11 @@ else
   let g:ghci_command_line_options = '-fobject-code'
 endif
 
+" Crystal lang
+let g:deoplete#sources#crystal#bin = '/usr/local/bin/cracker'
+let g:deoplete#sources#crystal#lib = '/usr/lib/crystal'
+let g:crystal_auto_format = 1
+
 "----------------------------------------------
 " Language: apiblueprint
 "----------------------------------------------
@@ -1004,4 +1011,12 @@ au FileType php set expandtab
 au FileType php set shiftwidth=4
 au FileType php set softtabstop=4
 au FileType php set tabstop=4
+
+"----------------------------------------------
+" Language: Crystal
+"----------------------------------------------
+au FileType crystal set expandtab
+au FileType crystal set shiftwidth=2
+au FileType crystal set softtabstop=2
+au FileType crystal set tabstop=2
 

@@ -85,6 +85,7 @@ sudo systemctl enable etckeeper.timer
 
 sudo pacman -S --noconfirm libcurl-gnutls lib32-libcurl-gnutls
 
+sudo pacman -S --noconfirm crystal shards
 
 ############## SOME EXTRA EXTENSIONS ##############
 
@@ -102,6 +103,8 @@ yaourt -S --noconfirm mongodb-bin
 # php extensions
 yaourt -S --noconfirm php-redis php-mongodb php-amqp
 
+# wrk benchmark tool
+yaourt -S --noconfirm wrk
 
 ####################
 # install dotfiles #
