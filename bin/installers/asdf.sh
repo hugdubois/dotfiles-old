@@ -9,7 +9,7 @@ SCRIPT_PATH=$(dirname "$SCRIPT")
 DOTFILES_PATH=$(realpath $SCRIPT_PATH/../..)
 
 [ -d "$HOME/.asdf" ] && rm -rf "$HOME/.asdf"
-git clone https://github.com/asdf-vm/asdf.git $HOME/.asdf --branch v0.7.1
+git clone https://github.com/asdf-vm/asdf.git $HOME/.asdf --branch v0.7.2
 
 [ -f "$HOME/.tool-versions" ] && rm -rf "$HOME/.tool-versions"
 #ln -s "$DOTFILES_PATH/tool-versions" "$HOME/.tool-versions"

@@ -17,7 +17,7 @@ mkdir -p "$HOME/.config/fish/completions"
 touch $HOME/.profile-secrets.fish
 curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs https://git.io/fisher
 fish -c 'fish_update_completions'
-fish -c 'fisher add edc/bass fisherman/await fisherman/done fisherman/fzf fisherman/get fisherman/getopts fisherman/humanize_duration fisherman/last_job_id fisherman/z'
+fish -c 'fisher add edc/bass fishpkg/fish-await jethrokuan/z jethrokuan/fzf fishpkg/fish-last-job-id franciscolourenco/done jorgebucaran/fish-getopts fishpkg/fish-humanize-duration'
 
 ln -s "$DOTFILES_PATH/config/fish/config.fish" "$HOME/.config/fish/config.fish"
 ln -s "$DOTFILES_PATH/config/fish/prompt.fish" "$HOME/.config/fish/prompt.fish"

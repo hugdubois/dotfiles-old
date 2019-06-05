@@ -1,0 +1,34 @@
+#!/bin/env sh
+
+# tmux chroot is used to emulated root fs on non root
+apt -y install proot
+#termux-chroot
+
+# config git
+git config --global user.name "Hugues Dubois"
+git config --global user.email "hugdubois@gmail.com"
+sudo git config --global user.name "Hugues Dubois"
+sudo git config --global user.email "hugdubois@gmail.com"
+
+# install base softwares
+apt -y install build-essential fish tmux neovim ctags mc exa curl python openssl openssl-dev openssl-tool ncurses ncurses-dev gnupg
+
+####################
+# install dotfiles #
+####################
+if [ ! -d "$HOME/src/github.com/hugdubois/dotfiles" ]; then
+  mkdir -p $HOME/src/github.com/hugdubois/
+fi;
+DOTFILES_PATH=$HOME/src/github.com/hugdubois/dotfiles
+cd $DOTFILES_PATH
+$DOTFILES_PATH/bin/installers/core.sh
+$DOTFILES_PATH/bin/installers/tmux.sh
+$DOTFILES_PATH/bin/installers/ctags.sh
+$DOTFILES_PATH/bin/installers/fish.sh
+$DOTFILES_PATH/bin/installers/mc.sh
+#$DOTFILES_PATH/bin/installers/mpd.sh
+pkg install -y erlang golang nodejs rust
+$DOTFILES_PATH/bin/installers/asdf.sh
+$DOTFILES_PATH/bin/installers/go.sh
+#$DOTFILES_PATH/bin/installers/nodejs.sh
+#$DOTFILES_PATH/bin/installers/nvim.sh

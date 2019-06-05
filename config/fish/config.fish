@@ -31,7 +31,9 @@ alias vim "nvim"
 alias vimdiff "nvim -d"
 alias cls "clear"
 
-set GITHUB_PATH "$GOPATH/src/github.com"
+set GITHUB_PATH "$HOME/src/github.com"
+
+set -gx GOPATH "$HOME/go"
 
 #alias cd-go-src "cd $GOPATH/src"
 #alias cd-go-bin "cd $GOPATH/bin"
@@ -111,6 +113,7 @@ end
 
 # PATH environment variable
 set add_to_path ~/bin \
+$GOPATH/bin \
 ~/.fzf/bin \
 ~/.local/bin \
 ~/.cargo/bin \

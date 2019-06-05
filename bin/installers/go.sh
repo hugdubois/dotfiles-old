@@ -8,9 +8,8 @@ esac
 SCRIPT_PATH=$(dirname "$SCRIPT")
 DOTFILES_PATH=$(realpath $SCRIPT_PATH/../..)
 
-# install go
-[ -d "$HOME/.go" ] && rm -rf "$HOME/.go"
-. $HOME/.asdf/asdf.sh
+[ -f "$HOME/.asdf/asdf.sh" ] && . $HOME/.asdf/asdf.sh
+
 # for vim-go
 [ -d "$GOPATH/src/github.com/nsf/gocode" ] && rm -rf "$GOPATH/src/github.com/nsf/gocode"
 [ -f "$GOPATH/bin/gocode" ] && rm -f "$GOPATH/bin/gocode"

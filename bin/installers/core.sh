@@ -9,8 +9,6 @@ SCRIPT_PATH=$(dirname "$SCRIPT")
 DOTFILES_PATH=$(realpath $SCRIPT_PATH/../..)
 
 mkdir -p $HOME/.local/bin
-sudo mkdir -p /usr/local/bin
-sudo mkdir -p /opt/bin
 
 # install some bin tools
 mkdir -p $HOME/bin
