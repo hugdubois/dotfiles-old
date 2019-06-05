@@ -10,6 +10,7 @@ DOTFILES_PATH=$(realpath $SCRIPT_PATH/../..)
 
 # install go
 [ -d "$HOME/.go" ] && rm -rf "$HOME/.go"
+mkdir "$HOME/.go"
 . $HOME/.asdf/asdf.sh
 # for vim-go
 [ -d "$GOPATH/src/github.com/nsf/gocode" ] && rm -rf "$GOPATH/src/github.com/nsf/gocode"

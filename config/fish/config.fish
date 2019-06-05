@@ -111,6 +111,7 @@ end
 
 # PATH environment variable
 set add_to_path ~/bin \
+~/.dotnet/tools \
 ~/.fzf/bin \
 ~/.local/bin \
 ~/.cargo/bin \

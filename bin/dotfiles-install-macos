@@ -20,9 +20,12 @@ brew install \
   the_silver_searcher mc lsd \
   neovim ctags jq \
   weechat youtube-dl \
-  tree feh \
+  htop tree feh \
   wxmac \
   nginx
+
+brew install tox
+brew cask install wkhtmltopdf
 
 brew cask install java
 brew cask install visual-studio-code
@@ -77,6 +80,14 @@ brew install mongodb
 brew install redis
 
 ############## LANGUAGES ##############
+
+# dotnet / mono
+brew cask install visual-studio
+#brew install mono
+brew cask install monogame
+# dotnet tool install -g fake-cli
+# dotnet tool install -g paket
+
 #brew install \
 #  php composer python \
 #  node \
