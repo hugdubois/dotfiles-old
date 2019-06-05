@@ -8,6 +8,9 @@ esac
 SCRIPT_PATH=$(dirname "$SCRIPT")
 DOTFILES_PATH=$(realpath $SCRIPT_PATH/../..)
 
+VERSION_FILE="$DOTFILES_PATH/tool-versions"
+[ -f "$DOTFILES_PATH/tool-versions.$1" ] && VERSION_FILE="$DOTFILES_PATH/tool-versions.$1"
+
 [ -d "$HOME/.asdf" ] && rm -rf "$HOME/.asdf"
 git clone https://github.com/asdf-vm/asdf.git $HOME/.asdf --branch v0.7.1
 
@@ -19,7 +22,7 @@ cp $HOME/.asdf/completions/asdf.fish $HOME/.config/fish/completions
 . $HOME/.asdf/asdf.sh
 
 $HOME/.asdf/bin/asdf update
-cat $DOTFILES_PATH/tool-versions | while read line
+cat $VERSION_FILE | while read line
 do
     echo "####### INSTALL : $line"
     plugin=$(echo $line | cut -d' ' -f1)
