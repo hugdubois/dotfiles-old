@@ -16,6 +16,14 @@ mkdir "$HOME/.go"
 [ -d "$GOPATH/src/github.com/nsf/gocode" ] && rm -rf "$GOPATH/src/github.com/nsf/gocode"
 [ -f "$GOPATH/bin/gocode" ] && rm -f "$GOPATH/bin/gocode"
 go get -u github.com/nsf/gocode
+
+[ -d "$HOME/src/github.com/saibingy" ] && rm -rf "$GOPATH/src/github.com/saibingy"
+mkdir -p "$HOME/src/github.com/saibingy"
+cd "$HOME/src/github.com/saibingy"
+git clone -b bingo https://github.com/saibing/tools.git
+cd tools/cmd/gopls
+go install
+
 #go get -u github.com/nsf/gocode
 #go get -u github.com/zmb3/gogetdoc
 #go get -u golang.org/x/tools/cmd/guru

@@ -24,10 +24,15 @@ brew install \
   wxmac \
   nginx
 
+
+brew install git-flow
 brew install tox
 brew cask install wkhtmltopdf
 
 brew cask install java
+brew install scala sbt
+brew tap coursier/formulas
+brew install coursier/formulas/coursier
 brew cask install visual-studio-code
 
 brew cask install firefox
@@ -120,5 +125,6 @@ $DOTFILES_PATH/bin/installers/zsh.sh
 $DOTFILES_PATH/bin/installers/asdf.sh
 $DOTFILES_PATH/bin/installers/go.sh
 $DOTFILES_PATH/bin/installers/nodejs.sh
-$DOTFILES_PATH/bin/installers/nvim.sh
 #$DOTFILES_PATH/bin/installers/rustup.sh
+$DOTFILES_PATH/bin/installers/nvim.sh
+$DOTFILES_PATH/bin/installers/sbt.sh

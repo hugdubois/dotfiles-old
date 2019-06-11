@@ -31,11 +31,13 @@ alias vim "nvim"
 alias vimdiff "nvim -d"
 alias cls "clear"
 
-set GITHUB_PATH "$GOPATH/src/github.com"
 
-#alias cd-go-src "cd $GOPATH/src"
-#alias cd-go-bin "cd $GOPATH/bin"
-#alias cd-github "cd $GOPATH/src/github.com"
+set -gx GOPATH (go env GOPATH)
+set -gx GITHUB_PATH "$HOME/src/github.com"
+
+alias cd-go-src "cd $GOPATH/src"
+alias cd-go-bin "cd $GOPATH/bin"
+alias cd-github "cd $GOPATH/src/github.com"
 alias cd-github "cd $GITHUB_PATH"
 alias cd-hugdubois "cd $HOME/src/github.com/hugdubois"
 alias cd-dotfiles "cd $DOFILES_PATH"
@@ -119,6 +121,7 @@ set add_to_path ~/bin \
 ~/.yarn/bin \
 ~/.config/composer/vendor/bin \
 ~/.vim/plugged/phpactor/bin \
+$GOPATH/bin \
 /usr/bin \
 /usr/sbin \
 /usr/local/bin \

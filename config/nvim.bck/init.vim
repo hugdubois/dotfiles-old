@@ -7,6 +7,7 @@
 "----------------------------------------------
 call plug#begin('~/.vim/plugged')
 
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Dependencies
 "Plug 'Shougo/neocomplcache'        " Depenency for Shougo/neosnippet
 Plug 'godlygeek/tabular'           " This must come before plasticboy/vim-markdown
@@ -36,20 +37,16 @@ Plug 'tpope/vim-surround'
 Plug 'vimwiki/vimwiki'
 Plug 'mattn/webapi-vim'
 Plug 'milkypostman/vim-togglelist'
-Plug 'jeffkreeftmeijer/vim-numbertoggle'
-Plug 'cloudhead/neovim-fuzzy'
+Plug 'phpactor/phpactor', {'for': 'php', 'do': 'composer install'}
+Plug 'kristijanhusak/deoplete-phpactor'
 
-" scala / ensime
-Plug 'ensime/ensime-vim', { 'do': ':UpdateRemotePlugins' }
-Plug 'derekwyatt/vim-scala' , {'for' : 'scala'}
-"
-if has('python3')
-    Plug 'roxma/nvim-yarp'
+" Vim only plugins
+if !has('nvim')
+    Plug 'scrooloose/nerdcommenter'
+    Plug 'jeffkreeftmeijer/vim-numbertoggle'
+    Plug 'Shougo/vimproc.vim', {'do' : 'make'}  " Needed to make sebdah/vim-delve work on Vim
+    Plug 'Shougo/vimshell.vim'                  " Needed to make sebdah/vim-delve work on Vim
 endif
-
-" autocompletion
-"Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 
 " Language support
 Plug 'fatih/vim-go'                            " Go support
@@ -60,6 +57,7 @@ Plug 'cespare/vim-toml'                        " toml syntax highlighting
 Plug 'chr4/nginx.vim'                          " nginx syntax highlighting
 Plug 'dag/vim-fish'                            " Fish syntax highlighting
 Plug 'digitaltoad/vim-pug'                     " Pug syntax highlighting
+Plug 'fishbullet/deoplete-ruby'                " Ruby auto completion
 Plug 'hashivim/vim-terraform'                  " Terraform syntax highlighting
 Plug 'kchmck/vim-coffee-script'                " CoffeeScript syntax highlighting
 Plug 'kylef/apiblueprint.vim'                  " API Blueprint syntax highlighting
@@ -70,9 +68,13 @@ Plug 'pangloss/vim-javascript'                 " JavaScript syntax highlighting
 Plug 'plasticboy/vim-markdown'                 " Markdown syntax highlighting
 Plug 'rodjek/vim-puppet'                       " Puppet syntax highlighting
 Plug 'tclh123/vim-thrift'                      " Thrift syntax highlighting
+Plug 'zchee/deoplete-jedi'                     " Go auto completion
 Plug 'kshenoy/vim-signature'                   " Show marks in margin
 Plug 'zimbatm/haproxy.vim'                     " HAProxy syntax highlighting
 Plug 'elmcast/elm-vim'                         " elm lang
+Plug 'pbogut/deoplete-elm'                     " elm-vim + deoplete
+Plug 'zchee/deoplete-go', { 'do': 'make'}      " Go auto completion
+Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 
 " Haskell Plugins
 if executable('ghc')
@@ -84,13 +86,16 @@ endif
 if executable('rustc')
   Plug 'rust-lang/rust.vim', { 'for': 'rust' }
   Plug 'racer-rust/vim-racer', { 'for': 'rust' }
+  Plug 'sebastianmarkow/deoplete-rust'
 endif
 
 " Colorschemes
 Plug 'NLKNguyen/papercolor-theme'
-Plug 'christoomey/vim-tmux-navigator'
 
+Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
+
+
 
 
 "----------------------------------------------
@@ -264,31 +269,6 @@ nnoremap <leader>h :split<cr>
 nnoremap <leader>q :close<cr>
 
 "----------------------------------------------
-" Plugin: neoclide/coc.nvim
-"----------------------------------------------
-" use <tab> for trigger completion and navigate to the next complete item
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-
-inoremap <silent><expr> <Tab>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<Tab>" :
-      \ coc#refresh()
-
-" use <c-space>for trigger completion
-inoremap <silent><expr> <c-space> coc#refresh()
-" Use <Tab> and <S-Tab> to navigate the completion list
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" Use <cr> to confirm completion
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
-" Close the preview window when completion is done
-autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-
-"----------------------------------------------
 " Plugin: MattesGroeger/vim-bookmarks
 "----------------------------------------------
 " Auto save bookmarks
@@ -333,6 +313,25 @@ autocmd BufEnter NERD_tree_* :call BookmarkUnmapKeys()
 "----------------------------------------------
 " normal direction
 let g:SuperTabDefaultCompletionType = "<c-n>"
+
+"----------------------------------------------
+" Plugin: Shougo/deoplete.nvim
+"----------------------------------------------
+if has('nvim')
+    " Enable deoplete on startup
+    let g:deoplete#enable_at_startup = 1
+    " deoplete tab-complete
+    "inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+endif
+
+" Disable deoplete when in multi cursor mode
+function! Multiple_cursors_before()
+    let b:deoplete_disable_auto_complete = 1
+endfunction
+
+function! Multiple_cursors_after()
+    let b:deoplete_disable_auto_complete = 0
+endfunction
 
 "----------------------------------------------
 " Plugin: bling/vim-airline
@@ -421,28 +420,8 @@ let g:calendar_view = "days"                  " Set days as the default view
 "----------------------------------------------
 " Plugin: 'junegunn/fzf.vim'
 "----------------------------------------------
-nnoremap <C-S-p> :FZF<cr>
-" fuzzy finder with ctrl-p
-nnoremap <C-p> :FuzzyOpen<CR>
+nnoremap <c-p> :FZF<cr>
 
-"----------------------------------------------
-" fzy integration
-"----------------------------------------------
-function! FzyCommand(choice_command, vim_command)
-  try
-    let output = system(a:choice_command . " | fzy ")
-  catch /Vim:Interrupt/
-    " Swallow errors from ^C, allow redraw! below
-  endtry
-  redraw!
-  if v:shell_error == 0 && !empty(output)
-    exec a:vim_command . ' ' . output
-  endif
-endfunction
-
-nnoremap <leader>e :call FzyCommand("find . -type f", ":e")<cr>
-nnoremap <leader>v :call FzyCommand("find . -type f", ":vs")<cr>
-nnoremap <leader>s :call FzyCommand("find . -type f", ":sp")<cr>
 "----------------------------------------------
 " Plugin: 'majutsushi/tagbar'
 "----------------------------------------------
@@ -520,8 +499,7 @@ let g:neomake_error_sign   = {'text': '✖', 'texthl': 'NeomakeErrorSign'}
 let g:neomake_warning_sign = {'text': '∆', 'texthl': 'NeomakeWarningSign'}
 let g:neomake_message_sign = {'text': '➤', 'texthl': 'NeomakeMessageSign'}
 let g:neomake_info_sign    = {'text': 'ℹ', 'texthl': 'NeomakeInfoSign'}
-let g:neomake_highlight_lines = 1
-let g:neomake_highlight_columns = 1
+
 "----------------------------------------------
 " Plugin: scrooloose/nerdtree
 "----------------------------------------------
@@ -569,10 +547,29 @@ let g:neosnippet#disable_runtime_snippets = {
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <C-k> <Plug>(neosnippet_expand_or_jump)
 xmap <C-k> <Plug>(neosnippet_expand_target)
-smap <silent><CR> <Plug>(neosnippet_jump_or_expand)
 
 " Set the path to our snippets
 let g:neosnippet#snippets_directory='~/.config/nvim/snippets'
+" deoplete with neosnippet
+" Map expression when a tab is hit:
+"           checks if the completion popup is visible
+"           if yes
+"               then it cycles to next item
+"           else
+"               if expandable_or_jumpable
+"                   then expands_or_jumps
+"                   else returns a normal TAB
+imap <expr><TAB>
+            \ pumvisible() ? "\<C-n>" :
+            \ neosnippet#expandable_or_jumpable() ?
+            \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+            \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" Expands or completes the selected snippet/item in the popup menu
+imap <expr><silent><CR> pumvisible() ? deoplete#mappings#close_popup() .
+            \ "\<Plug>(neosnippet_jump_or_expand)" : "\<CR>"
+smap <silent><CR> <Plug>(neosnippet_jump_or_expand)
 
 "----------------------------------------------
 " Plugin: vimwiki/vimwiki
@@ -593,6 +590,15 @@ au FileType vimwiki set tabstop=2
 "----------------------------------------------
 let g:multi_cursor_next_key='<C-n>'
 let g:multi_cursor_skip_key='<C-b>'
+
+"----------------------------------------------
+" Plugin: zchee/deoplete-go
+"----------------------------------------------
+" Enable completing of go pointers
+let g:deoplete#sources#go#package_dot = 0
+let g:deoplete#sources#go#pointer = 1
+let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
+let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
 
 
 "----------------------------------------------
@@ -631,36 +637,24 @@ au FileType elm nmap <leader>w <Plug>(elm-browse-docs)
 "----------------------------------------------
 let g:rustfmt_autosave = 1
 let g:rust_clip_command = 'xclip -selection clipboard'
+"----------------------------------------------
+" Plugin: sebastianmarkow/deoplete-rust
+"----------------------------------------------
+let g:deoplete#sources#rust#racer_binary=$HOME.'/.cargo/bin/racer'
+let g:deoplete#sources#rust#rust_source_path=$GOPATH.'/src/github.com/rust-lang/rust/src'
+let g:deoplete#sources#rust#show_duplicates=1
+"let g:deoplete#sources#rust#disable_keymap=1
+let g:deoplete#sources#rust#documentation_max_height=20
 
 "----------------------------------------------
-" Language: Scala
+" Plugin: zchee/deoplete-go
 "----------------------------------------------
-" neomake configuration for Scala.
-"Linting with neomake
-let g:neomake_sbt_maker = {
-      \ 'exe': 'sbt',
-      \ 'args': ['-Dsbt.log.noformat=true', 'compile'],
-      \ 'append_file': 0,
-      \ 'auto_enabled': 1,
-      \ 'output_stream': 'stdout',
-      \ 'errorformat':
-          \ '%E[%trror]\ %f:%l:\ %m,' .
-            \ '%-Z[error]\ %p^,' .
-            \ '%-C%.%#,' .
-            \ '%-G%.%#'
-     \ }
-" Neomake on text change
-autocmd InsertLeave,TextChanged *.scala update | Neomake! sbt
-autocmd InsertLeave,TextChanged *.sc    update | Neomake! sbt
-autocmd BufRead,BufNewFile *.sbt     set ft=scala
-autocmd BufNewFile,BufRead *.scala   set ft=scala " Set syntax highlighting for .scala files
-autocmd BufNewFile,BufRead *.sc      set ft=scala " Set syntax highlighting for scala worksheet files
-autocmd BufWritePost *.scala silent :EnTypeCheck
-autocmd BufWritePost *.sc    silent :EnTypeCheck
-noremap <leader>tt :EnType<CR>
-au FileType scala nnoremap <leader>gd :EnDeclaration<CR>
-au FileType scala nnoremap <leader>gdv :EnDeclarationSplit v<CR>
-au FileType scala nnoremap <leader>gdh :EnDeclarationSplit<CR>
+" Enable completing of go pointers
+let g:deoplete#sources#go#package_dot = 0
+let g:deoplete#sources#go#pointer = 1
+let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
+let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
+
 
 "----------------------------------------------
 " Language: Golang
@@ -762,6 +756,25 @@ let g:neomake_go_gometalinter_maker = {
   \   '%W%f:%l::%tarning: %m'
   \ }
 
+" PHP
+" context-aware menu with all functions (ALT-m)
+nnoremap <m-m> :call phpactor#ContextMenu()<cr>
+
+nnoremap gd :call phpactor#GotoDefinition()<CR>
+nnoremap gr :call phpactor#FindReferences()<CR>
+
+" Extract method from selection
+vmap <silent><Leader>em :<C-U>call phpactor#ExtractMethod()<CR>
+" extract variable
+vnoremap <silent><Leader>ee :<C-U>call phpactor#ExtractExpression(v:true)<CR>
+nnoremap <silent><Leader>ee :call phpactor#ExtractExpression(v:false)<CR>
+" extract interface
+nnoremap <silent><Leader>rei :call phpactor#ClassInflect()<CR>
+
+" deoplete configuration
+let g:deoplete#sources = {}
+let g:deoplete#sources.php = ['omni', 'phpactor', 'ultisnips', 'buffer']
+
 " Haskell
 " Changes highlighting links to use Type/Structure
 let g:haskell_classic_highlighting = 1
@@ -796,14 +809,6 @@ else
   let g:ghci_command = 'ghci'
   let g:ghci_command_line_options = '-fobject-code'
 endif
-
-
-"----------------------------------------------
-" neomake gloabl configuration
-"----------------------------------------------
-"let g:neomake_enabled_makers = ['sbt']
-"let g:neomake_verbose=3
-
 
 "----------------------------------------------
 " Language: apiblueprint
@@ -999,4 +1004,12 @@ au FileType elm set expandtab
 au FileType elm set shiftwidth=4
 au FileType elm set softtabstop=4
 au FileType elm set tabstop=4
+
+"----------------------------------------------
+" Language: PHP
+"----------------------------------------------
+au FileType php set expandtab
+au FileType php set shiftwidth=4
+au FileType php set softtabstop=4
+au FileType php set tabstop=4
 

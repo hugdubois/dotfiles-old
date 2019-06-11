@@ -15,9 +15,9 @@ ln -s "$DOTFILES_PATH/config/nvim" "$HOME/.config/nvim"
 [ -d "$HOME/.vim" ] && rm -rf "$HOME/.vim"
 #pip2 install --upgrade neovim
 #sudo pip3 install --force-reinstall pip
-sudo pip2 install --force-reinstall neovim
-sudo pip3 install --force-reinstall neovim
-gem install neovim
+sudo pip2 install --force-reinstall neovim websocket-client sexpdata
+sudo pip3 install --force-reinstall neovim websocket-client sexpdata
+sudo gem install neovim
 
 nvim +PlugInstall +qall
 nvim +GoInstallBinaries +qall
