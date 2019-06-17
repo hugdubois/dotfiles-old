@@ -33,6 +33,8 @@ brew cask install java
 brew install scala sbt
 brew tap coursier/formulas
 brew install coursier/formulas/coursier
+brew install --HEAD olafurpg/scalafmt/scalafmt
+brew install nailgun
 brew cask install visual-studio-code
 
 brew cask install firefox

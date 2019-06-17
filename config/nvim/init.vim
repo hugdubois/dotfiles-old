@@ -26,7 +26,6 @@ Plug 'mhinz/vim-signify'
 Plug 'mileszs/ack.vim'
 Plug 'neomake/neomake'
 Plug 'rbgrouleff/bclose.vim'
-Plug 'sbdchd/neoformat'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'sebdah/vim-delve'
@@ -38,6 +37,8 @@ Plug 'mattn/webapi-vim'
 Plug 'milkypostman/vim-togglelist'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'cloudhead/neovim-fuzzy'
+Plug 'Chiel92/vim-autoformat'
+"Plug 'sbdchd/neoformat'
 
 " scala / ensime
 Plug 'ensime/ensime-vim', { 'do': ':UpdateRemotePlugins' }
@@ -76,14 +77,14 @@ Plug 'elmcast/elm-vim'                         " elm lang
 
 " Haskell Plugins
 if executable('ghc')
-  Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
-  Plug 'owickstrom/neovim-ghci', { 'for': 'haskell' }
+    Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
+    Plug 'owickstrom/neovim-ghci', { 'for': 'haskell' }
 endif
 
 " Rust Plugins
 if executable('rustc')
-  Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-  Plug 'racer-rust/vim-racer', { 'for': 'rust' }
+    Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+    Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 endif
 
 " Colorschemes
@@ -268,14 +269,14 @@ nnoremap <leader>q :close<cr>
 "----------------------------------------------
 " use <tab> for trigger completion and navigate to the next complete item
 function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
 
 inoremap <silent><expr> <Tab>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<Tab>" :
-      \ coc#refresh()
+            \ pumvisible() ? "\<C-n>" :
+            \ <SID>check_back_space() ? "\<Tab>" :
+            \ coc#refresh()
 
 " use <c-space>for trigger completion
 inoremap <silent><expr> <c-space> coc#refresh()
@@ -429,15 +430,15 @@ nnoremap <C-p> :FuzzyOpen<CR>
 " fzy integration
 "----------------------------------------------
 function! FzyCommand(choice_command, vim_command)
-  try
-    let output = system(a:choice_command . " | fzy ")
-  catch /Vim:Interrupt/
-    " Swallow errors from ^C, allow redraw! below
-  endtry
-  redraw!
-  if v:shell_error == 0 && !empty(output)
-    exec a:vim_command . ' ' . output
-  endif
+    try
+        let output = system(a:choice_command . " | fzy ")
+    catch /Vim:Interrupt/
+        " Swallow errors from ^C, allow redraw! below
+    endtry
+    redraw!
+    if v:shell_error == 0 && !empty(output)
+        exec a:vim_command . ' ' . output
+    endif
 endfunction
 
 nnoremap <leader>e :call FzyCommand("find . -type f", ":e")<cr>
@@ -455,42 +456,42 @@ let g:tagbar_autofocus = 1
 " Language: Go
 " Tagbar configuration for Golang
 let g:tagbar_type_go = {
-    \ 'ctagstype' : 'go',
-    \ 'kinds'     : [
-        \ 'p:package',
-        \ 'i:imports:1',
-        \ 'c:constants',
-        \ 'v:variables',
-        \ 't:types',
-        \ 'n:interfaces',
-        \ 'w:fields',
-        \ 'e:embedded',
-        \ 'm:methods',
-        \ 'r:constructor',
-        \ 'f:functions'
-    \ ],
-    \ 'sro' : '.',
-    \ 'kind2scope' : {
-        \ 't' : 'ctype',
-        \ 'n' : 'ntype'
-    \ },
-    \ 'scope2kind' : {
-        \ 'ctype' : 't',
-        \ 'ntype' : 'n'
-    \ },
-    \ 'ctagsbin'  : 'gotags',
-    \ 'ctagsargs' : '-sort -silent'
-\ }
+            \ 'ctagstype' : 'go',
+            \ 'kinds'     : [
+            \ 'p:package',
+            \ 'i:imports:1',
+            \ 'c:constants',
+            \ 'v:variables',
+            \ 't:types',
+            \ 'n:interfaces',
+            \ 'w:fields',
+            \ 'e:embedded',
+            \ 'm:methods',
+            \ 'r:constructor',
+            \ 'f:functions'
+            \ ],
+            \ 'sro' : '.',
+            \ 'kind2scope' : {
+            \ 't' : 'ctype',
+            \ 'n' : 'ntype'
+            \ },
+            \ 'scope2kind' : {
+            \ 'ctype' : 't',
+            \ 'ntype' : 'n'
+            \ },
+            \ 'ctagsbin'  : 'gotags',
+            \ 'ctagsargs' : '-sort -silent'
+            \ }
 
 let g:tagbar_type_elm = {
-          \   'ctagstype':'elm'
-          \ , 'kinds':['h:header', 'i:import', 't:type', 'f:function', 'e:exposing']
-          \ , 'sro':'&&&'
-          \ , 'kind2scope':{ 'h':'header', 'i':'import'}
-          \ , 'sort':0
-          \ , 'ctagsbin':'~/.config/nvim/scripts/elmtags.py'
-          \ , 'ctagsargs': ''
-          \ }
+            \   'ctagstype':'elm'
+            \ , 'kinds':['h:header', 'i:import', 't:type', 'f:function', 'e:exposing']
+            \ , 'sro':'&&&'
+            \ , 'kind2scope':{ 'h':'header', 'i':'import'}
+            \ , 'sort':0
+            \ , 'ctagsbin':'~/.config/nvim/scripts/elmtags.py'
+            \ , 'ctagsargs': ''
+            \ }
 "----------------------------------------------
 " Plugin: plasticboy/vim-markdown
 "----------------------------------------------
@@ -523,6 +524,23 @@ let g:neomake_info_sign    = {'text': 'ℹ', 'texthl': 'NeomakeInfoSign'}
 let g:neomake_highlight_lines = 1
 let g:neomake_highlight_columns = 1
 "----------------------------------------------
+" Plugin: Chiel92/vim-autoformat
+"----------------------------------------------
+noremap <F5> :Autoformat<CR>
+au BufWrite * :Autoformat
+let g:formatdef_scalafmt = "'scalafmt --stdin'"
+let g:formatters_scala = ['scalafmt']
+
+"----------------------------------------------
+" Language: sbdchd/neoformat
+"----------------------------------------------
+"let g:neoformat_scala_scalafmt = {
+"\ 'exe': 'ng',
+"\ 'args': ['scalafmt', '--stdin'],
+"\ 'stdin': 1,
+"\ }
+"autocmd BufWritePre *.{scala,sbt} Neoformat
+"----------------------------------------------
 " Plugin: scrooloose/nerdtree
 "----------------------------------------------
 nnoremap <leader>d :NERDTreeToggle<cr>
@@ -530,13 +548,13 @@ nnoremap <F2> :NERDTreeToggle<cr>
 
 " Files to ignore
 let NERDTreeIgnore = [
-    \ '\~$',
-    \ '\.pyc$',
-    \ '^\.DS_Store$',
-    \ '^node_modules$',
-    \ '^.ropeproject$',
-    \ '^__pycache__$'
-\]
+            \ '\~$',
+            \ '\.pyc$',
+            \ '^\.DS_Store$',
+            \ '^node_modules$',
+            \ '^.ropeproject$',
+            \ '^__pycache__$'
+            \]
 
 " Close vim if NERDTree is the only opened window.
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
@@ -562,8 +580,8 @@ let g:delve_backend = "native"
 " Below you can disable default snippets for specific languages. If you set the
 " language to _ it sets the default for all languages.
 let g:neosnippet#disable_runtime_snippets = {
-    \ 'go': 1
-\}
+            \ 'go': 1
+            \}
 
 " Keybindings
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
@@ -579,9 +597,9 @@ let g:neosnippet#snippets_directory='~/.config/nvim/snippets'
 "----------------------------------------------
 " Path to wiki
 let g:vimwiki_list = [{
-        \ 'path': '~/Dropbox/vimwiki',
-        \ 'syntax': 'markdown',
-        \ 'ext': '.vimwiki.markdown'}]
+            \ 'path': '~/Dropbox/vimwiki',
+            \ 'syntax': 'markdown',
+            \ 'ext': '.vimwiki.markdown'}]
 
 au FileType vimwiki set expandtab
 au FileType vimwiki set shiftwidth=2
@@ -601,20 +619,20 @@ let g:multi_cursor_skip_key='<C-b>'
 let g:elm_format_autosave = 1
 let g:elm_setup_keybindings = 1
 let g:neomake_elm_elmmake_maker = {
-  \ 'exe': 'elm make',
-  \ 'buffer_output': 1,
-  \ 'errorformat':
-    \ '%E%.%#--\ %m\ -%# %f' . ',' .
-    \ '%C%l\\|' . ',' .
-    \ '%C%.%#'
-\ }
+            \ 'exe': 'elm make',
+            \ 'buffer_output': 1,
+            \ 'errorformat':
+            \ '%E%.%#--\ %m\ -%# %f' . ',' .
+            \ '%C%l\\|' . ',' .
+            \ '%C%.%#'
+            \ }
 
 " enable elm-make on elm
 let g:neomake_elm_enabled_makers = [ 'elm make' ]
 
 " use neomake to build different files
 augroup neomake_neomake_build
-  autocmd! BufRead,BufWritePost *.elm Neomake elmmake
+    autocmd! BufRead,BufWritePost *.elm Neomake elmmake
 augroup end
 
 au FileType elm nmap <leader>m <Plug>(elm-make)
@@ -638,17 +656,17 @@ let g:rust_clip_command = 'xclip -selection clipboard'
 " neomake configuration for Scala.
 "Linting with neomake
 let g:neomake_sbt_maker = {
-      \ 'exe': 'sbt',
-      \ 'args': ['-Dsbt.log.noformat=true', 'compile'],
-      \ 'append_file': 0,
-      \ 'auto_enabled': 1,
-      \ 'output_stream': 'stdout',
-      \ 'errorformat':
-          \ '%E[%trror]\ %f:%l:\ %m,' .
+            \ 'exe': 'sbt',
+            \ 'args': ['-Dsbt.log.noformat=true', 'compile'],
+            \ 'append_file': 0,
+            \ 'auto_enabled': 1,
+            \ 'output_stream': 'stdout',
+            \ 'errorformat':
+            \ '%E[%trror]\ %f:%l:\ %m,' .
             \ '%-Z[error]\ %p^,' .
             \ '%-C%.%#,' .
             \ '%-G%.%#'
-     \ }
+            \ }
 " Neomake on text change
 autocmd InsertLeave,TextChanged *.scala update | Neomake! sbt
 autocmd InsertLeave,TextChanged *.sc    update | Neomake! sbt
@@ -722,17 +740,17 @@ let g:go_test_show_name = 1
 let g:go_metalinter_command = ""
 let g:go_metalinter_deadline = "5s"
 let g:go_metalinter_enabled = [
-    \ 'deadcode',
-    \ 'errcheck',
-    \ 'gas',
-    \ 'goconst',
-    \ 'gocyclo',
-    \ 'golint',
-    \ 'gosimple',
-    \ 'ineffassign',
-    \ 'vet',
-    \ 'vetshadow'
-\]
+            \ 'deadcode',
+            \ 'errcheck',
+            \ 'gas',
+            \ 'goconst',
+            \ 'gocyclo',
+            \ 'golint',
+            \ 'gosimple',
+            \ 'ineffassign',
+            \ 'vet',
+            \ 'vetshadow'
+            \]
 
 " Set whether the JSON tags should be snakecase or camelcase.
 let g:go_addtags_transform = "snakecase"
@@ -740,48 +758,48 @@ let g:go_addtags_transform = "snakecase"
 " neomake configuration for Go.
 let g:neomake_go_enabled_makers = [ 'go', 'gometalinter' ]
 let g:neomake_go_gometalinter_maker = {
-  \ 'args': [
-  \   '--tests',
-  \   '--enable-gc',
-  \   '--concurrency=3',
-  \   '--fast',
-  \   '-D', 'aligncheck',
-  \   '-D', 'dupl',
-  \   '-D', 'gocyclo',
-  \   '-D', 'gotype',
-  \   '-E', 'errcheck',
-  \   '-E', 'misspell',
-  \   '-E', 'unused',
-  \   '%:p:h',
-  \ ],
-  \ 'append_file': 0,
-  \ 'errorformat':
-  \   '%E%f:%l:%c:%trror: %m,' .
-  \   '%W%f:%l:%c:%tarning: %m,' .
-  \   '%E%f:%l::%trror: %m,' .
-  \   '%W%f:%l::%tarning: %m'
-  \ }
+            \ 'args': [
+            \   '--tests',
+            \   '--enable-gc',
+            \   '--concurrency=3',
+            \   '--fast',
+            \   '-D', 'aligncheck',
+            \   '-D', 'dupl',
+            \   '-D', 'gocyclo',
+            \   '-D', 'gotype',
+            \   '-E', 'errcheck',
+            \   '-E', 'misspell',
+            \   '-E', 'unused',
+            \   '%:p:h',
+            \ ],
+            \ 'append_file': 0,
+            \ 'errorformat':
+            \   '%E%f:%l:%c:%trror: %m,' .
+            \   '%W%f:%l:%c:%tarning: %m,' .
+            \   '%E%f:%l::%trror: %m,' .
+            \   '%W%f:%l::%tarning: %m'
+            \ }
 
 " Haskell
 " Changes highlighting links to use Type/Structure
 let g:haskell_classic_highlighting = 1
 
 augroup ghciMaps
-  au!
-  " Background process and window management
-  au FileType haskell nnoremap <silent> <leader>gs :GhciStart<CR>
-  au FileType haskell nnoremap <silent> <leader>gk :GhciKill<CR>
+    au!
+    " Background process and window management
+    au FileType haskell nnoremap <silent> <leader>gs :GhciStart<CR>
+    au FileType haskell nnoremap <silent> <leader>gk :GhciKill<CR>
 
-  " Open GHCi split horizontally
-  au FileType haskell nnoremap <silent> <leader>go :GhciOpen<CR>
-  au FileType haskell nnoremap <silent> <leader>gh :GhciHide<CR>
+    " Open GHCi split horizontally
+    au FileType haskell nnoremap <silent> <leader>go :GhciOpen<CR>
+    au FileType haskell nnoremap <silent> <leader>gh :GhciHide<CR>
 
-  " Automatically reload on save
-  au BufWritePost *.hs GhciReload
+    " Automatically reload on save
+    au BufWritePost *.hs GhciReload
 
-  " Load individual modules
-  au FileType haskell nnoremap <silent> <leader>gl :GhciLoadCurrentModule<CR>
-  au FileType haskell nnoremap <silent> <leader>gf :GhciLoadCurrentFile<CR>
+    " Load individual modules
+    au FileType haskell nnoremap <silent> <leader>gl :GhciLoadCurrentModule<CR>
+    au FileType haskell nnoremap <silent> <leader>gf :GhciLoadCurrentFile<CR>
 augroup END
 
 " GHCi starts automatically. Set this if you'd like to prevent that.
@@ -790,11 +808,11 @@ let g:ghci_start_immediately = 1
 " GHCi Settings
 " Check if shell.nix exists in root, use nix shell if so
 if !empty(glob('shell.nix'))
-  let g:ghci_command = 'nix-shell --command "cabal repl"'
-  let g:ghci_command_line_options = ''
+    let g:ghci_command = 'nix-shell --command "cabal repl"'
+    let g:ghci_command_line_options = ''
 else
-  let g:ghci_command = 'ghci'
-  let g:ghci_command_line_options = '-fobject-code'
+    let g:ghci_command = 'ghci'
+    let g:ghci_command_line_options = '-fobject-code'
 endif
 
 

@@ -22,3 +22,15 @@ coursier bootstrap \
   -r bintray:scalacenter/releases \
   -r sonatype:snapshots \
   -o /usr/local/bin/metals-vim -f
+
+
+coursier bootstrap --standalone org.scalameta:scalafmt-cli_2.12:2.0.0-RC8 \
+  -r sonatype:snapshots \
+  -o /usr/local/bin/scalafmt_ng -f \
+  --main com.martiansoftware.nailgun.NGServer
+
+launchctl remove "nailgun.scalafmt"
+[ -f "$HOME/Library/LaunchAgents/nailgun.scalafmt.plist" ] && rm "$HOME/Library/LaunchAgents/nailgun.scalafmt.plist"
+ln -s "$DOTFILES_PATH/Library/LaunchAgents/nailgun.scalafmt.plist" "$HOME/Library/LaunchAgents/nailgun.scalafmt.plist"
+launchctl load -w "$HOME/Library/LaunchAgents/nailgun.scalafmt.plist"
+ng ng-alias scalafmt org.scalafmt.cli.Cli

@@ -32,6 +32,7 @@ alias vimdiff "nvim -d"
 alias cls "clear"
 
 
+source ~/.asdf/asdf.fish
 set -gx GOPATH (go env GOPATH)
 set -gx GITHUB_PATH "$HOME/src/github.com"
 
@@ -59,8 +60,8 @@ alias tmux-game "tmux_new game $HOME"
 alias tmux-github "tmux_new github $GITHUB_PATH"
 
 switch (uname)
-    case Linux
-      alias open "xdg-open"
+  case Linux
+    alias open "xdg-open"
 end
 
 function ls-all-file
@@ -73,7 +74,7 @@ end
 function basename-url
   if not set -q $argv
     basename -s .git (echo $argv | sed 's/"//g' | rev | cut -d '/' -f 1 | rev)
-  end
+end
 end
 
 function github-clone-org
@@ -84,24 +85,24 @@ function github-clone-org
     for repo in (curl -s "https://api.github.com/orgs/"$argv"/repos?per_page=200" | jq .[].ssh_url)
       #set n (basename-url $repo)
       git clone (echo $repo | sed 's/"//g')
-    end
   end
+end
 end
 
 function tmux_new
   if set -q $argv
     set argv "main $HOME"
-  end
-  set n (echo $argv | cut -d" " -f1)
-  set p (echo $argv | cut -d" " -f2)
-  if not tmux has-session -t $n
-    tmux new -d -s $n -c $p
-  end
-  if not set -q TMUX
-    tmux attach -t $n
-  else
-    tmux switch-client -t $n
-  end
+end
+set n (echo $argv | cut -d" " -f1)
+set p (echo $argv | cut -d" " -f2)
+if not tmux has-session -t $n
+  tmux new -d -s $n -c $p
+end
+if not set -q TMUX
+  tmux attach -t $n
+else
+  tmux switch-client -t $n
+end
 end
 
 # dcleanup can be used to clean up docker images.
@@ -130,8 +131,7 @@ $GOPATH/bin \
 for p in $add_to_path
   if test -d $p
     set -gx PATH $p $PATH
-  end
+end
 end
 
 set -g fish_user_paths "/usr/local/sbin" $fish_user_paths
-source ~/.asdf/asdf.fish
