@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+[ -z "$1" ] && echo "Usage: new-fabulous-app APP-NAME --WPF --UWP --macOS --GTK" && exit 1
+dotnet new -i Fabulous.Templates
+dotnet new fabulous-app -n $@
+

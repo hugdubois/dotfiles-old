@@ -13,16 +13,16 @@ brew tap caskroom/cask
 brew cask install xquartz
 
 brew install \
-  coreutils automake autoconf openssl \
-  unzip fop curl libyaml readline libxslt libtool unixodbc \
-  p7zip unzip curl \
-  tmux reattach-to-user-namespace fish \
-  the_silver_searcher mc lsd \
-  neovim ctags jq \
-  weechat youtube-dl \
-  htop tree feh \
-  wxmac \
-  nginx
+	coreutils automake autoconf openssl \
+	unzip fop curl libyaml readline libxslt libtool unixodbc \
+	p7zip unzip unrar curl \
+	tmux reattach-to-user-namespace fish \
+	the_silver_searcher mc lsd \
+	neovim ctags jq \
+	weechat youtube-dl \
+	htop tree feh \
+	wxmac \
+	nginx
 
 
 brew install git-flow
@@ -37,7 +37,18 @@ brew install --HEAD olafurpg/scalafmt/scalafmt
 brew install nailgun
 brew cask install visual-studio-code
 
+# android
+brew cask install android-file-transfer
+brew cask install android-sdk
+brew cask install androidtool
+brew cask install android-platform-tools
+
 brew cask install firefox
+brew cask install vlc
+# install nord vpn
+brew cask install nordvpn
+brew cask install qbittorrent
+
 
 ############## ENTERTAINMENT/GAMING ##############
 # mpd / ncmpcpp
@@ -92,10 +103,12 @@ brew install redis
 
 # dotnet / mono
 brew cask install visual-studio
+brew cask install dotnet-sdk
 #brew install mono
 brew cask install monogame
-# dotnet tool install -g fake-cli
-# dotnet tool install -g paket
+brew cask install xamarin-android
+brew cask install xamarin-ios
+brew cask install xamarin-mac
 
 #brew install \
 #  php composer python \
@@ -110,8 +123,8 @@ brew cask install monogame
 # install dotfiles #
 ####################
 if [ ! -d "$HOME/src/github.com/hugdubois/dotfiles" ]; then
-  mkdir -p $HOME/src/github.com/hugdubois/
-  git clone https://raw.githubusercontent.com/hugdubois/dotfiles $HOME/src/github.com/hugdubois/dotfiles
+	mkdir -p $HOME/src/github.com/hugdubois/
+	git clone https://raw.githubusercontent.com/hugdubois/dotfiles $HOME/src/github.com/hugdubois/dotfiles
 fi;
 DOTFILES_PATH=$HOME/src/github.com/hugdubois/dotfiles
 cd $DOTFILES_PATH
