@@ -56,6 +56,7 @@ brew install mpd ncmpcpp
 
 # retro gamming/games
 brew cask install retroarch
+brew cask install fs-uae
 
 ############# THEME #########################
 # fonts
