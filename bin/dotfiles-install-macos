@@ -13,7 +13,7 @@ brew tap caskroom/cask
 brew cask install xquartz
 
 brew install \
-	coreutils automake autoconf openssl \
+	coreutils automake autoconf openssl gpg \
 	unzip fop curl libyaml readline libxslt libtool unixodbc \
 	p7zip unzip unrar curl \
 	tmux reattach-to-user-namespace fish \
@@ -25,34 +25,20 @@ brew install \
 	nginx
 
 
-brew install git-flow
-brew install tox
-brew cask install wkhtmltopdf
-
-brew cask install java
-brew install scala sbt
-brew tap coursier/formulas
-brew install coursier/formulas/coursier
-brew install --HEAD olafurpg/scalafmt/scalafmt
-brew install nailgun
-brew cask install visual-studio-code
-
-# android
-brew cask install android-file-transfer
-brew cask install android-sdk
-brew cask install androidtool
-brew cask install android-platform-tools
-
+# ui softwares
 brew cask install firefox
 brew cask install vlc
+brew cask install slack
+
 # install nord vpn
 brew cask install nordvpn
 brew cask install qbittorrent
 
 
 ############## ENTERTAINMENT/GAMING ##############
-# mpd / ncmpcpp
+# mpd / ncmpcpp / spotify
 brew install mpd ncmpcpp
+brew cask install spotify
 
 # retro gamming/games
 brew cask install retroarch
@@ -71,6 +57,9 @@ brew cask install font-hack-nerd-font
 # brew install docker-compose docker-compose-completion
 # sudo groupadd docker
 # sudo usermod -aG docker hug
+
+# cloud tools
+brew install azure-cli
 
 ############## DATABASES ##############
 # sqlite
@@ -101,6 +90,29 @@ brew install mongodb
 brew install redis
 
 ############## LANGUAGES ##############
+
+brew install git-flow
+brew install tox
+brew cask install wkhtmltopdf
+
+# java/scala stack
+brew cask install java
+brew install scala sbt
+brew cask install intellij-idea-ce
+defaults write com.jetbrains.intellij.ce ApplePressAndHoldEnabled -bool no
+
+# android
+brew cask install android-file-transfer
+brew cask install android-sdk
+brew cask install androidtool
+brew cask install android-platform-tools
+
+# dotnet f#
+brew tap coursier/formulas
+brew install coursier/formulas/coursier
+brew install --HEAD olafurpg/scalafmt/scalafmt
+brew install nailgun
+brew cask install visual-studio-code
 
 # dotnet / mono
 brew cask install visual-studio
@@ -143,4 +155,5 @@ $DOTFILES_PATH/bin/installers/go.sh
 $DOTFILES_PATH/bin/installers/nodejs.sh
 #$DOTFILES_PATH/bin/installers/rustup.sh
 $DOTFILES_PATH/bin/installers/nvim.sh
+$DOTFILES_PATH/bin/installers/intellij.sh
 $DOTFILES_PATH/bin/installers/sbt.sh
