@@ -8,6 +8,7 @@ sudo git config --global user.email "hugdubois@gmail.com"
 
 brew update
 brew tap caskroom/cask
+brew tap homebrew/cask-versions
 
 ############## CORE ##############
 brew cask install xquartz
@@ -97,6 +98,7 @@ brew cask install wkhtmltopdf
 
 # java/scala stack
 brew cask install java
+brew cask install java11
 brew install scala sbt
 brew cask install intellij-idea-ce
 defaults write com.jetbrains.intellij.ce ApplePressAndHoldEnabled -bool no
@@ -131,6 +133,8 @@ brew cask install xamarin-mac
 #  haskell ocaml \
 #  gnu-smalltalk
 
+
+brew install nodejs
 
 ####################
 # install dotfiles #
