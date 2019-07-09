@@ -160,4 +160,5 @@ $DOTFILES_PATH/bin/installers/nodejs.sh
 #$DOTFILES_PATH/bin/installers/rustup.sh
 $DOTFILES_PATH/bin/installers/nvim.sh
 $DOTFILES_PATH/bin/installers/intellij.sh
+$DOTFILES_PATH/bin/installers/vscode.sh
 $DOTFILES_PATH/bin/installers/sbt.sh
