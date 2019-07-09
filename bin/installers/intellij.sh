@@ -11,3 +11,5 @@ DOTFILES_PATH=$(realpath $SCRIPT_PATH/../..)
 [ -d "$HOME/.ideavimrc" ] && rm -rf "$HOME/.ideavimrc"
 ln -s "$DOTFILES_PATH/ideavimrc" "$HOME/.ideavimrc"
 
+# continious keys on vim mode
+defaults write com.jetbrains.intellij ApplePressAndHoldEnabled -bool flase
