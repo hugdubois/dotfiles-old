@@ -668,13 +668,13 @@ let g:neomake_sbt_maker = {
             \ '%-G%.%#'
             \ }
 " Neomake on text change
-autocmd InsertLeave,TextChanged *.scala update | Neomake! sbt
-autocmd InsertLeave,TextChanged *.sc    update | Neomake! sbt
-autocmd BufRead,BufNewFile *.sbt     set ft=scala
-autocmd BufNewFile,BufRead *.scala   set ft=scala " Set syntax highlighting for .scala files
-autocmd BufNewFile,BufRead *.sc      set ft=scala " Set syntax highlighting for scala worksheet files
-autocmd BufWritePost *.scala silent :EnTypeCheck
-autocmd BufWritePost *.sc    silent :EnTypeCheck
+au InsertLeave,TextChanged *.scala update | Neomake! sbt
+au InsertLeave,TextChanged *.sc    update | Neomake! sbt
+au BufRead,BufNewFile *.sbt     set ft=scala
+au BufNewFile,BufRead *.scala   set ft=scala " Set syntax highlighting for .scala files
+au BufNewFile,BufRead *.sc      set ft=scala " Set syntax highlighting for scala worksheet files
+au BufWritePost *.scala silent :EnTypeCheck
+au BufWritePost *.sc    silent :EnTypeCheck
 noremap <leader>tt :EnType<CR>
 au FileType scala nnoremap <leader>gd :EnDeclaration<CR>
 au FileType scala nnoremap <leader>gdv :EnDeclarationSplit v<CR>

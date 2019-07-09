@@ -7,7 +7,7 @@
   "suggest.snippetIndicator": " ►",
   "languageserver": {
     "metals": {
-      "command": "metals-vim",
+      "command": "java8-metals-vim",
       "rootPatterns": ["build.sbt"],
       "filetypes": ["scala", "sbt"]
     },
