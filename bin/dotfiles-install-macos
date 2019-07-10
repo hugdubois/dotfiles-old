@@ -29,12 +29,17 @@ brew install \
 # ui softwares
 brew cask install firefox
 brew cask install vlc
+
+# communication
 brew cask install slack
+brew cask install skype
 
 # install nord vpn
 brew cask install nordvpn
 brew cask install qbittorrent
 
+# markdown viewer
+brew cask install typora
 
 ############## ENTERTAINMENT/GAMING ##############
 # mpd / ncmpcpp / spotify
@@ -99,6 +104,7 @@ brew cask install wkhtmltopdf
 # java/scala stack
 brew cask install java
 brew cask install java11
+brew cask insatll visualvm
 brew install scala sbt
 brew cask install intellij-idea-ce
 defaults write com.jetbrains.intellij.ce ApplePressAndHoldEnabled -bool no
