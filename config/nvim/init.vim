@@ -74,6 +74,7 @@ Plug 'tclh123/vim-thrift'                      " Thrift syntax highlighting
 Plug 'kshenoy/vim-signature'                   " Show marks in margin
 Plug 'zimbatm/haproxy.vim'                     " HAProxy syntax highlighting
 Plug 'elmcast/elm-vim'                         " elm lang
+Plug 'bfredl/nvim-miniyank'
 
 " Haskell Plugins
 if executable('ghc')
@@ -403,6 +404,14 @@ let g:ctrlp_map = ''
 map  <leader><leader>w <Plug>(easymotion-bd-w)
 nmap <leader><leader>w <Plug>(easymotion-overwin-w)
 
+
+"----------------------------------------------
+" Plugin: bfredl/nvim-miniyank
+" ----------------------------------------------
+" Fix column clipboard cf. https://github.com/neovim/neovim/issues/1822
+map p <Plug>(miniyank-autoput)
+map P <Plug>(miniyank-autoPut)
+
 "----------------------------------------------
 " Plugin: 'itchyny/calendar.vim'
 "----------------------------------------------
@@ -527,7 +536,7 @@ let g:neomake_highlight_columns = 1
 " Plugin: Chiel92/vim-autoformat
 "----------------------------------------------
 noremap <F5> :Autoformat<CR>
-au BufWrite * :Autoformat
+"au BufWrite * :Autoformat
 let g:formatdef_scalafmt = "'scalafmt --stdin'"
 let g:formatters_scala = ['scalafmt']
 
@@ -856,7 +865,7 @@ au FileType gitcommit setlocal textwidth=80
 "----------------------------------------------
 " Language: fish
 "----------------------------------------------
-au FileType fish set expandtab
+au FileType fish set noexpandtab
 au FileType fish set shiftwidth=2
 au FileType fish set softtabstop=2
 au FileType fish set tabstop=2

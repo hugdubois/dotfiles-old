@@ -27,6 +27,7 @@ brew install \
 
 
 # ui softwares
+brew cask install opera
 brew cask install firefox
 brew cask install vlc
 
@@ -40,6 +41,14 @@ brew cask install qbittorrent
 
 # markdown viewer
 brew cask install typora
+
+# development tools
+brew cask install postman
+brew cask install fork
+brew cask install pgadmin4
+
+# elm
+brew install elm
 
 ############## ENTERTAINMENT/GAMING ##############
 # mpd / ncmpcpp / spotify
@@ -102,13 +111,16 @@ brew install tox
 brew cask install wkhtmltopdf
 
 # java/scala stack
-brew cask install java
-brew cask install java11
+#brew cask install java
+#brew cask install java11
 brew cask insatll visualvm
+brew cask install adoptopenjdk8
 brew install scala sbt
+brew install maven
+brew install ammonite-repl
 brew cask install intellij-idea-ce
 defaults write com.jetbrains.intellij.ce ApplePressAndHoldEnabled -bool no
-
+brew install scalacenter/bloop/bloop
 # android
 brew cask install android-file-transfer
 brew cask install android-sdk
@@ -130,6 +142,8 @@ brew cask install monogame
 brew cask install xamarin-android
 brew cask install xamarin-ios
 brew cask install xamarin-mac
+brew tap samritchie/forge
+brew install forge
 
 #brew install \
 #  php composer python \

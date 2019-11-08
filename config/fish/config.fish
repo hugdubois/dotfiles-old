@@ -12,7 +12,7 @@ set -gx FZF_DEFAULT_COMMAND 'ag --hidden --skip-vcs-ignores --ignore .git --igno
 set -gx LSCOLORS 'Exfxcxdxbxegedabagacad'
 #set -gx ZSH "~/.oh-my-zsh"
 set -gx DOFILES_PATH "$HOME/src/github.com/hugdubois/dotfiles"
-
+set -gx SDKMAN_DIR "$HOME/.sdkman"
 # Disable the fish greeting
 set fish_greeting ""
 
@@ -105,8 +105,25 @@ else
 end
 end
 
-# dcleanup can be used to clean up docker images.
-function dcleanup
+# scala ammonite shell
+function amm --description 'Scala REPL'
+    sh -c 'amm "$@"' amm $argv
+end
+
+function sbt-cleanup
+  rm -rf target
+  rm -rf **/target
+  rm -rf .metals
+  rm -rf **/.metals
+  rm -rf .idea
+  rm -rf .DS_Store
+  rm *.bak
+  rm **/*.bak
+end
+
+
+# docker-cleanup can be used to clean up docker images.
+function docker-cleanup
   docker rm -v (docker ps --filter status=exited -q ^ /dev/null) ^ /dev/null
   docker rmi (docker images --filter dangling=true -q ^ /dev/null) ^ /dev/null
   docker volume rm (docker volume ls -qf dangling=true)

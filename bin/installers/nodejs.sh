@@ -19,3 +19,4 @@ npm install -g elchemy
 # typescript / react
 npm install -g typescript
 npm install -g create-react-app
+npm install -g http-server
