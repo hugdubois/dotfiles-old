@@ -25,7 +25,6 @@ brew install \
 	wxmac \
 	nginx
 
-
 # ui softwares
 brew cask install opera
 brew cask install firefox
@@ -106,6 +105,7 @@ brew install redis
 
 ############## LANGUAGES ##############
 
+brew install tig
 brew install git-flow
 brew install tox
 brew cask install wkhtmltopdf
