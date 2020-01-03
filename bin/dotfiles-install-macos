@@ -43,6 +43,7 @@ brew cask install typora
 
 # development tools
 brew cask install postman
+brew cask install insomnia
 brew cask install fork
 brew cask install pgadmin4
 
@@ -121,6 +122,7 @@ brew install ammonite-repl
 brew cask install intellij-idea-ce
 defaults write com.jetbrains.intellij.ce ApplePressAndHoldEnabled -bool no
 brew install scalacenter/bloop/bloop
+brew install giter8
 # android
 brew cask install android-file-transfer
 brew cask install android-sdk

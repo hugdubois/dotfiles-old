@@ -71,6 +71,13 @@ function ls-all-file
   NF&&f{ print s"/"$0 }'
 end
 
+function la-all-file
+  ls -aR $argv | awk '
+  /:$/&&f{s=$0;f=0}
+  /:$/&&!f{sub(/:$/,"");s=$0;f=1;next}
+  NF&&f{ print s"/"$0 }'
+end
+
 function basename-url
   if not set -q $argv
     basename -s .git (echo $argv | sed 's/"//g' | rev | cut -d '/' -f 1 | rev)
@@ -152,3 +159,4 @@ end
 end
 
 set -g fish_user_paths "/usr/local/sbin" $fish_user_paths
+set -g fish_user_paths "/usr/local/opt/node@12/bin" $fish_user_paths
