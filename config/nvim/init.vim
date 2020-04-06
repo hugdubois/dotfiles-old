@@ -38,6 +38,7 @@ Plug 'milkypostman/vim-togglelist'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'cloudhead/neovim-fuzzy'
 Plug 'Chiel92/vim-autoformat'
+Plug 'ssteinbach/vim-pico8-syntax'
 "Plug 'sbdchd/neoformat'
 
 " scala / ensime
@@ -51,6 +52,7 @@ endif
 " autocompletion
 "Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+Plug 'scalameta/coc-metals', {'do': 'yarn install --frozen-lockfile'}
 
 " Language support
 Plug 'fatih/vim-go'                            " Go support
@@ -58,7 +60,7 @@ Plug 'elixir-editors/vim-elixir'               " Elixir syntax support
 Plug 'slashmili/alchemist.vim'
 Plug 'aklt/plantuml-syntax'                    " PlantUML syntax highlighting
 Plug 'cespare/vim-toml'                        " toml syntax highlighting
-Plug 'chr4/nginx.vim'                          " nginx syntax highlighting
+"Plug 'chr4/nginx.vim'                          " nginx syntax highlighting
 Plug 'dag/vim-fish'                            " Fish syntax highlighting
 Plug 'digitaltoad/vim-pug'                     " Pug syntax highlighting
 Plug 'hashivim/vim-terraform'                  " Terraform syntax highlighting
@@ -134,6 +136,8 @@ set foldmethod=syntax             " syntax folding method
 set foldlevelstart=30             " default foldlevel to 30 folds
 " Use all the memory needed, for maximum performance.
 set maxmempattern=2000000
+" Better display for messages
+set cmdheight=2
 
 " neovim specific settings
 if has('nvim')
@@ -520,7 +524,7 @@ nnoremap <leader>w :Bclose<cr>
 " Plugin: mileszs/ack.vim
 "----------------------------------------------
 " Open ack
-nnoremap <leader>a :Ack!<space>
+"nnoremap <leader>a :Ack!<space>
 
 "----------------------------------------------
 " Plugin: neomake/neomake
@@ -656,8 +660,19 @@ au FileType elm nmap <leader>w <Plug>(elm-browse-docs)
 "----------------------------------------------
 " Language: Rust
 "----------------------------------------------
+" racer
+let g:racer_cmd = "~/.cargo/bin/racer"
 let g:rustfmt_autosave = 1
-let g:rust_clip_command = 'xclip -selection clipboard'
+"let g:rust_clip_command = 'xclip -selection clipboard'
+let g:rust_clip_command = 'pbcopy'
+au FileType rust set makeprg=cargo\ build\ -j\ 4
+au FileType rust nmap <leader>t :!cargo test<cr>
+au FileType rust nmap <leader>r :!RUST_BACKTRACE=1 cargo run<cr>
+au FileType rust nmap <leader>c :term cargo build -j 4<cr>
+au FileType rust nmap gd <Plug>(rust-def)
+au FileType rust nmap gs <Plug>(rust-def-split)
+au FileType rust nmap gx <Plug>(rust-def-vertical)
+au FileType rust nmap <leader>gd <Plug>(rust-doc)
 
 "----------------------------------------------
 " Language: Scala
@@ -682,13 +697,14 @@ au InsertLeave,TextChanged *.sc    update | Neomake! sbt
 au BufRead,BufNewFile *.sbt     set ft=scala
 au BufNewFile,BufRead *.scala   set ft=scala " Set syntax highlighting for .scala files
 au BufNewFile,BufRead *.sc      set ft=scala " Set syntax highlighting for scala worksheet files
-au BufWritePost *.scala silent :EnTypeCheck
-au BufWritePost *.sc    silent :EnTypeCheck
-noremap <leader>tt :EnType<CR>
-au FileType scala nnoremap <leader>gd :EnDeclaration<CR>
-au FileType scala nnoremap <leader>gdv :EnDeclarationSplit v<CR>
-au FileType scala nnoremap <leader>gdh :EnDeclarationSplit<CR>
-
+"au BufWritePost *.scala silent :EnTypeCheck
+"au BufWritePost *.sc    silent :EnTypeCheck
+" Remap keys for gotos
+au FileType scala nmap <silent> gd <Plug>(coc-definition)
+au FileType scala nmap <silent> gy <Plug>(coc-type-definition)
+au FileType scala nmap <silent> gi <Plug>(coc-implementation)
+au FileType scala nmap <silent> gr <Plug>(coc-references)
+au FileType scala nmap <silent> rn <Plug>(coc-rename)
 "----------------------------------------------
 " Language: Golang
 "----------------------------------------------

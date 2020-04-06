@@ -1,4 +1,6 @@
 function fish_prompt --description 'Write out the prompt'
+	set -x RUST_SRC_PATH (rustc --print sysroot)/lib/rustlib/src/rust/src
+
   set -l last_status $status
 
   if not test $last_status -eq 0

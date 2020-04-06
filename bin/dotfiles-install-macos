@@ -19,7 +19,7 @@ brew install \
 	p7zip unzip unrar curl \
 	tmux reattach-to-user-namespace fish \
 	the_silver_searcher mc lsd \
-	neovim ctags jq \
+	neovim vifm ctags jq fzy \
 	weechat youtube-dl \
 	htop tree feh \
 	wxmac \
@@ -73,6 +73,8 @@ brew cask install font-hack-nerd-font
 # sudo groupadd docker
 # sudo usermod -aG docker hug
 
+# brew install kustomize
+
 # cloud tools
 brew install azure-cli
 
@@ -116,6 +118,8 @@ brew cask install wkhtmltopdf
 #brew cask install java11
 brew cask insatll visualvm
 brew cask install adoptopenjdk8
+brew cask install adoptopenjdk11
+#brew cask install graalvm/tap/graalvm-ce-java11
 brew install scala sbt
 brew install maven
 brew install ammonite-repl

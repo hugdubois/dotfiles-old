@@ -2,3 +2,7 @@
 [[ -f ~/.env ]] && . ~/.env
 [[ -f ~/.bash_aliases ]] && . ~/.bash_aliases
 [[ -f ~/.profile-secrets ]] && . ~/.profile-secrets
+
+source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+export PATH="$HOME/.cargo/bin:$PATH"

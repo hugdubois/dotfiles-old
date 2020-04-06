@@ -1,4 +1,5 @@
 {
+  "coc.preferences.jumpCommand": "tab drop",
   "suggest.triggerAfterInsertEnter": true,
   "suggest.timeout": 500,
   "suggest.noselect": false,
@@ -16,6 +17,15 @@
       "args": [],
       "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
       "filetypes": ["go"]
+    },
+    "elmLS": {
+      "command": "elm-language-server",
+      "filetypes": ["elm"],
+      "rootPatterns": ["elm.json"],
+      "initializationOptions": {
+        "elmAnalyseTrigger": "change"
+      }
     }
-  }
+  },
+  "codeLens.enable": true
 }

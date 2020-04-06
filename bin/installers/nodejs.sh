@@ -20,3 +20,5 @@ npm install -g elchemy
 npm install -g typescript
 npm install -g create-react-app
 npm install -g http-server
+
+npm install -g mf-bootstrap

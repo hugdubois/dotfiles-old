@@ -1,4 +1,6 @@
 fisherman/fzf
+fisherman/z
 fisherman/getopts
 edc/bass
 fisherman/done
+evanlucas/fish-kubectl-completions

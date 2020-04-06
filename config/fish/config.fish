@@ -1,6 +1,5 @@
 fish_vi_key_bindings
 set -gx LESS '-F -g -i -M -R -S -w -X -z-4'
-set -gx RUST_SRC_PATH ~/src/github.com/rust-lang/rust/src/
 set -gx BROWSER open
 set -gx EDITOR nvim
 set -gx VISUAL nvim
@@ -12,14 +11,12 @@ set -gx FZF_DEFAULT_COMMAND 'ag --hidden --skip-vcs-ignores --ignore .git --igno
 set -gx LSCOLORS 'Exfxcxdxbxegedabagacad'
 #set -gx ZSH "~/.oh-my-zsh"
 set -gx DOFILES_PATH "$HOME/src/github.com/hugdubois/dotfiles"
-set -gx SDKMAN_DIR "$HOME/.sdkman"
 # Disable the fish greeting
 set fish_greeting ""
 
-#fish_vi_key_bindings
-
 . ~/.profile-secrets.fish
 . ~/.config/fish/prompt.fish
+. ~/.config/fish/notes.fish
 
 # Aliases
 alias grep 'grep --color=auto'
@@ -30,7 +27,6 @@ alias ssh "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
 alias vim "nvim"
 alias vimdiff "nvim -d"
 alias cls "clear"
-
 
 source ~/.asdf/asdf.fish
 set -gx GOPATH (go env GOPATH)
@@ -46,12 +42,23 @@ alias cd-gomeet "cd $HOME/src/github.com/gomeet"
 alias cd-gomeet-gomeet "cd $HOME/src/github.com/gomeet/gomeet"
 alias cd-mister "cd $HOME/src/github.com/MiSTer-devel"
 
+if test -e "/Applications/draw.io.app/Contents/MacOS/draw.io"
+	alias draw.io "/Applications/draw.io.app/Contents/MacOS/draw.io"
+end
+
 if type -q exa
   alias l "exa -Gl --git"
   alias ls "exa -Gla --git"
   alias ll "exa -l --git"
   alias la "exa -la --git"
 end
+
+if type -q lsd
+  alias l "lsd -l"
+  alias ll "lsd -l"
+  alias lla "lsd -la"
+end
+
 alias e "editor"
 alias planning "task calendar ;and task list"
 
@@ -81,7 +88,7 @@ end
 function basename-url
   if not set -q $argv
     basename -s .git (echo $argv | sed 's/"//g' | rev | cut -d '/' -f 1 | rev)
-end
+  end
 end
 
 function github-clone-org
@@ -92,24 +99,24 @@ function github-clone-org
     for repo in (curl -s "https://api.github.com/orgs/"$argv"/repos?per_page=200" | jq .[].ssh_url)
       #set n (basename-url $repo)
       git clone (echo $repo | sed 's/"//g')
+    end
   end
-end
 end
 
 function tmux_new
   if set -q $argv
     set argv "main $HOME"
-end
-set n (echo $argv | cut -d" " -f1)
-set p (echo $argv | cut -d" " -f2)
-if not tmux has-session -t $n
-  tmux new -d -s $n -c $p
-end
-if not set -q TMUX
-  tmux attach -t $n
-else
-  tmux switch-client -t $n
-end
+  end
+  set n (echo $argv | cut -d' ' -f1)
+  set p (echo $argv | cut -d' ' -f2)
+  if not tmux has-session -t $n
+    tmux new -d -s $n -c $p
+  end
+  if not set -q TMUX
+    tmux attach -t $n
+  else
+    tmux switch-client -t $n
+  end
 end
 
 # scala ammonite shell
@@ -128,7 +135,6 @@ function sbt-cleanup
   rm **/*.bak
 end
 
-
 # docker-cleanup can be used to clean up docker images.
 function docker-cleanup
   docker rm -v (docker ps --filter status=exited -q ^ /dev/null) ^ /dev/null
@@ -136,12 +142,20 @@ function docker-cleanup
   docker volume rm (docker volume ls -qf dangling=true)
 end
 
+#sdkman
+set -gx SDKMAN_DIR "$HOME/.sdkman"
+if test -e $SDKMAN_DIR
+	bass source $SDKMAN_DIR/bin/sdkman-init.sh
+end
+
+
 # PATH environment variable
 set add_to_path ~/bin \
 ~/.dotnet/tools \
 ~/.fzf/bin \
 ~/.local/bin \
 ~/.cargo/bin \
+~/.rustup \
 ~/.gem/ruby/2.5.0/bin \
 ~/.yarn/bin \
 ~/.config/composer/vendor/bin \
@@ -150,12 +164,13 @@ $GOPATH/bin \
 /usr/bin \
 /usr/sbin \
 /usr/local/bin \
-/opt/bin
+/opt/bin \
+(find $SDKMAN_DIR/candidates/*/current/bin -maxdepth 0)
 
 for p in $add_to_path
   if test -d $p
     set -gx PATH $p $PATH
-end
+  end
 end
 
 set -g fish_user_paths "/usr/local/sbin" $fish_user_paths
