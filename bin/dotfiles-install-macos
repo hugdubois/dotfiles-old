@@ -20,6 +20,7 @@ brew install \
 	tmux reattach-to-user-namespace fish \
 	the_silver_searcher mc lsd \
 	neovim vifm ctags jq fzy \
+	emacs \
 	weechat youtube-dl \
 	htop tree feh \
 	wxmac \
